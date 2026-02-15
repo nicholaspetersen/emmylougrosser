@@ -17,23 +17,23 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-background-secondary py-24 overflow-hidden">
-      <div className="mx-auto max-w-[1280px] px-8">
-        <div className="flex flex-col gap-8 items-center">
-          <div className="text-center max-w-[768px] flex flex-col gap-5">
+    <section className="bg-background-secondary py-16 lg:py-24 overflow-hidden">
+      <div className="mx-auto max-w-[1280px] px-6 sm:px-8">
+        <div className="flex flex-col gap-6 lg:gap-8 items-center">
+          <div className="text-center max-w-[768px] flex flex-col gap-4 lg:gap-5">
             <h2 
-              className="font-semibold text-4xl leading-[44px] tracking-[-0.72px] text-foreground"
+              className="font-semibold text-3xl lg:text-4xl leading-tight lg:leading-[44px] tracking-[-0.72px] text-foreground"
               style={{ fontFamily: 'var(--font-inter)' }}
             >
               Stay connected to what is going on
             </h2>
-            <p className="text-xl leading-[30px] text-foreground-secondary">
+            <p className="text-lg lg:text-xl leading-7 lg:leading-[30px] text-foreground-secondary">
               Be the first to know about new resources and upcoming projects.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="w-full max-w-[480px]">
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <div className="flex-1">
                 <label htmlFor="email" className="sr-only">
                   Email address

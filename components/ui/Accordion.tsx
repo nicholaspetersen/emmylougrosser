@@ -11,13 +11,13 @@ interface AccordionItemProps {
 
 function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProps) {
   return (
-    <div className="bg-white border border-border-light rounded-xl shadow-xs">
+    <div className="bg-white border border-border-light shadow-xs">
       <button
         onClick={onToggle}
-        className="flex w-full items-center justify-between p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl"
+        className="flex w-full items-center justify-between p-4 lg:p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         aria-expanded={isOpen}
       >
-        <span className="text-lg font-semibold leading-7 text-foreground pr-4">
+        <span className="text-base lg:text-lg font-semibold leading-6 lg:leading-7 text-foreground pr-4">
           {question}
         </span>
         <span
@@ -27,7 +27,7 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
           aria-hidden="true"
         >
           <svg
-            className="h-6 w-6 text-foreground"
+            className="h-5 w-5 lg:h-6 lg:w-6 text-foreground"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -46,7 +46,7 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
           isOpen ? "max-h-96" : "max-h-0"
         }`}
       >
-        <p className="px-4 pb-4 text-foreground-secondary leading-relaxed">
+        <p className="px-4 lg:px-5 pb-4 lg:pb-5 text-sm lg:text-base text-foreground-secondary leading-relaxed">
           {answer}
         </p>
       </div>

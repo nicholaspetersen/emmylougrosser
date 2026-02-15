@@ -33,7 +33,7 @@ export default function PatternHero({ title, subtitle, label }: PatternHeroProps
               {title}
             </h1>
             {subtitle && (
-              <p className="font-serif text-xl leading-[30px] text-foreground-secondary">
+              <p className="font-serif text-xl leading-[30px] text-foreground">
                 {subtitle}
               </p>
             )}

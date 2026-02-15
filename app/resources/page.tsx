@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
+import Button from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Resources | Dr. Emmylou Grosser",
@@ -22,6 +23,7 @@ const selectedPublications = [
       { label: "David's Lament article", url: "https://muse.jhu.edu/pub/137/article/678742" },
       { label: "Symmetry article", url: "https://brill.com/view/journals/vt/71/2/article-p175_2.xml?language=en&srsltid=AfmBOoppPFye6WH_EtAmTAU9cJ6ed1GkycTRmYu5npdxhx5YUbKKHWU_" },
     ],
+    type: "Book",
   },
   {
     title: "Configuring Psalm 29 as a Poem: Cognitive Strategies and the Artful Reading Experience",
@@ -29,6 +31,7 @@ const selectedPublications = [
     link: "https://doi.org/10.3390/rel15121428",
     description:
       "In this article I use color and mark-ups to demonstrate the concepts of Unparalleled Poetry, showing what Psalm 29 does as a poem and how it does it.",
+    type: "Article",
   },
   {
     title: "On the Nature of Poetry, Parallelism, and Methods: A Response to Ernst Wendland",
@@ -36,6 +39,7 @@ const selectedPublications = [
     link: "https://doi.org/10.54395/JOT-E6UNP",
     description:
       "This article sets my work within the broader context of biblical poetry studies, explaining ways that I build upon and also depart from the work of other scholars.",
+    type: "Article",
   },
 ];
 
@@ -80,7 +84,8 @@ export default function ResourcesPage() {
       <Header />
       <main>
         <PatternHero
-          title="Resources"
+          label="Resources"
+          title="Publications & Resources"
           subtitle="Publications, articles, and other resources on biblical Hebrew poetry"
         />
 
@@ -91,25 +96,49 @@ export default function ResourcesPage() {
               Selected Publications
             </h2>
 
-            <div className="mt-6 space-y-6">
+            <div className="mt-12 space-y-6">
               {selectedPublications.map((pub, index) => (
                 <article
                   key={index}
                   className="bg-white p-8 shadow-xs"
                 >
+                  {/* Icon with background circle */}
+                  <div className="mb-4">
+                    <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10">
+                      {pub.type === "Book" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                          />
+                        </svg>
+                      )}
+                      {pub.type === "Article" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
                   <h3 className="font-serif font-medium text-xl lg:text-2xl text-foreground">
-                    {pub.link ? (
-                      <a
-                        href={pub.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-primary transition-colors"
-                      >
-                        {pub.title}
-                      </a>
-                    ) : (
-                      pub.title
-                    )}
+                    {pub.title}
                   </h3>
                   {pub.series && (
                     <p className="mt-1 text-sm text-foreground-secondary">{pub.series}</p>
@@ -133,29 +162,35 @@ export default function ResourcesPage() {
                     </p>
                   )}
                   {pub.relatedLinks && (
-                    <div className="mt-4 flex flex-wrap gap-4">
-                      {pub.relatedLinks.map((link, linkIndex) => (
-                        <a
-                          key={linkIndex}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-primary hover:text-primary-hover transition-colors"
-                        >
-                          {link.label} →
-                        </a>
-                      ))}
+                    <div className="mt-6 pt-4 border-t border-border-light">
+                      <p className="text-sm font-semibold text-foreground mb-3">
+                        Earlier versions of this content:
+                      </p>
+                      <div className="flex flex-wrap gap-4">
+                        {pub.relatedLinks.map((link, linkIndex) => (
+                          <a
+                            key={linkIndex}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-foreground-secondary hover:text-foreground transition-colors underline"
+                          >
+                            {link.label} →
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   )}
                   {pub.link && (
-                    <a
-                      href={pub.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block mt-4 text-sm font-semibold text-foreground hover:text-primary transition-colors"
-                    >
-                      View Publication →
-                    </a>
+                    <div className="mt-6">
+                      <Button
+                        href={pub.link}
+                        variant="primary"
+                        external
+                      >
+                        View Publication
+                      </Button>
+                    </div>
                   )}
                 </article>
               ))}
@@ -170,32 +205,66 @@ export default function ResourcesPage() {
               Other Resources
             </h2>
 
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
               {otherResources.map((resource, index) => (
                 <article
                   key={index}
                   className="p-6 border border-border-light"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="inline-block px-3 py-1 text-xs font-semibold bg-primary/10 text-primary rounded">
-                      {resource.type}
-                    </span>
+                  {/* Icon with background circle stacked above title */}
+                  <div className="mb-4">
+                    <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10">
+                      {resource.type === "Podcast" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                          />
+                        </svg>
+                      )}
+                      {resource.type === "Interview" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                          />
+                        </svg>
+                      )}
+                      {resource.type === "Presentation" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                          />
+                        </svg>
+                      )}
+                    </div>
                   </div>
-                  <h3 className="mt-4 font-semibold text-lg text-foreground">
-                    {resource.link ? (
-                      <a
-                        href={resource.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-primary transition-colors"
-                      >
-                        {resource.title}
-                      </a>
-                    ) : (
-                      resource.title
-                    )}
+                  <h3 className="font-semibold text-lg text-foreground">
+                    {resource.title}
                   </h3>
-                  <p className="mt-1 text-sm text-foreground-secondary">
+                  <p className="mt-3 text-sm text-foreground-secondary">
                     {resource.source}
                   </p>
                   <p className="mt-3 text-sm text-foreground-secondary leading-relaxed">
@@ -207,14 +276,15 @@ export default function ResourcesPage() {
                     </p>
                   )}
                   {resource.link && (
-                    <a
-                      href={resource.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block mt-4 text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
-                    >
-                      Access Resource →
-                    </a>
+                    <div className="mt-6">
+                      <Button
+                        href={resource.link}
+                        variant="primary"
+                        external
+                      >
+                        View Resource
+                      </Button>
+                    </div>
                   )}
                 </article>
               ))}

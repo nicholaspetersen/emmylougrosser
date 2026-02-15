@@ -20,16 +20,16 @@ const faqItems = [
 
 export default function FAQ() {
   return (
-    <section className="bg-background-secondary py-24">
-      <div className="mx-auto max-w-[1280px] px-8">
-        <div className="flex flex-col gap-16 items-center">
+    <section className="bg-background-secondary py-16 lg:py-24">
+      <div className="mx-auto max-w-[1280px] px-6 sm:px-8">
+        <div className="flex flex-col gap-12 lg:gap-16 items-center">
           {/* Section Header */}
           <div className="text-center max-w-[900px]">
             <p className="text-base font-semibold leading-6 text-accent">
               FAQ
             </p>
             <h2 
-              className="mt-2 font-medium text-4xl leading-[44px] tracking-[-0.72px] text-foreground"
+              className="mt-2 font-medium text-3xl lg:text-4xl leading-tight lg:leading-[44px] tracking-[-0.72px] text-foreground"
               style={{ fontFamily: 'var(--font-crimson)' }}
             >
               Frequently Asked Questions

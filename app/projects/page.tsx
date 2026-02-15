@@ -21,7 +21,7 @@ const projects = [
         url: "https://ucrisportal.univie.ac.at/en/projects/repetition-parallelism-and-creativity-an-inquiry-into-the-constru/",
       },
     ],
-    status: "Active",
+    icon: "poetry",
   },
   {
     title: "Biblical Hebrew poetry and the Masoretic accents",
@@ -33,13 +33,13 @@ const projects = [
         url: "https://ufs.academia.edu/SophiaPitcher",
       },
     ],
-    status: "Active",
+    icon: "accents",
   },
   {
     title: "Poetics of biblical narrative",
     description:
       "Exploring the Song of the Sea (Exodus 15:1-18) in its narrative context, examining how poetic and narrative elements interact and enhance each other.",
-    status: "Active",
+    icon: "narrative",
   },
 ];
 
@@ -59,21 +59,67 @@ export default function ProjectsPage() {
               Current Projects
             </h2>
 
-            <div className="mt-6 space-y-6">
+            <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
               {projects.map((project, index) => (
                 <article
                   key={index}
-                  className="bg-white p-8 shadow-xs"
+                  className="bg-white p-8 shadow-xs flex flex-col"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="font-serif font-medium text-xl lg:text-2xl text-foreground">
-                      {project.title}
-                    </h3>
-                    <span className="inline-block px-3 py-1 text-xs font-semibold bg-primary/10 text-primary rounded flex-shrink-0">
-                      {project.status}
-                    </span>
+                  {/* Icon with background circle */}
+                  <div className="mb-6">
+                    <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10">
+                      {project.icon === "poetry" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                          />
+                        </svg>
+                      )}
+                      {project.icon === "accents" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+                          />
+                        </svg>
+                      )}
+                      {project.icon === "narrative" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                          />
+                        </svg>
+                      )}
+                    </div>
                   </div>
-                  <p className="mt-4 text-foreground-secondary leading-7">
+
+                  <h3 className="font-serif font-medium text-xl text-foreground">
+                    {project.title}
+                  </h3>
+                  <p className="mt-4 text-foreground-secondary leading-7 flex-grow">
                     {project.description}
                   </p>
 

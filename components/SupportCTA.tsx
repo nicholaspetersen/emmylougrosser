@@ -3,7 +3,7 @@ import Button from "./ui/Button";
 export default function SupportCTA() {
   return (
     <section 
-      className="relative py-24 overflow-hidden"
+      className="relative py-16 lg:py-24 overflow-hidden"
       style={{
         backgroundImage: `url('/images/pattern.png')`,
         backgroundSize: '936px 936px',
@@ -11,19 +11,19 @@ export default function SupportCTA() {
         backgroundRepeat: 'repeat',
       }}
     >
-      <div className="mx-auto max-w-[1280px] px-8">
+      <div className="mx-auto max-w-[1280px] px-6 sm:px-8">
         {/* Frosted glass card */}
         <div 
-          className="bg-white/90 backdrop-blur-[7.55px] p-16 flex flex-col gap-8 items-center"
+          className="bg-white/90 backdrop-blur-[7.55px] p-8 lg:p-16 flex flex-col gap-6 lg:gap-8 items-center"
         >
-          <div className="text-center max-w-[768px] flex flex-col gap-5">
+          <div className="text-center max-w-[768px] flex flex-col gap-4 lg:gap-5">
             <h2 
-              className="font-medium text-4xl leading-[44px] tracking-[-0.72px] text-foreground"
+              className="font-medium text-3xl lg:text-4xl leading-tight lg:leading-[44px] tracking-[-0.72px] text-foreground"
               style={{ fontFamily: 'var(--font-crimson)' }}
             >
               Support this work
             </h2>
-            <p className="text-xl leading-[30px] text-foreground-secondary">
+            <p className="text-lg lg:text-xl leading-7 lg:leading-[30px] text-foreground-secondary">
               Your contribution helps fund the creation of open-access resources
               for educators, translators, and students worldwide.
             </p>
