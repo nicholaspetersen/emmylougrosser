@@ -20,20 +20,32 @@ export default function FeaturedResource() {
         {/* Content */}
         <div className="mx-auto max-w-[1280px] px-6 sm:px-8 w-full">
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start justify-center">
-            {/* Book Cover with shadow effects */}
-            <div className="relative flex-shrink-0 mx-auto lg:mx-0">
-              <div 
-                className="relative"
-                style={{
-                  filter: 'drop-shadow(0px 8.93px 11.9px rgba(10, 13, 18, 0.08)) drop-shadow(0px 2.98px 4.46px rgba(10, 13, 18, 0.03))'
-                }}
-              >
-                {/* Book cover */}
-                <img 
-                  src="/images/unparalled-poetry-book-cover.png"
-                  alt="Unparalleled Poetry book cover"
-                  className="w-[240px] sm:w-[280px] lg:w-[311px] h-auto"
+            {/* Book Cover with decorative panel */}
+            <div className="relative flex-shrink-0 mx-auto lg:mx-0 pl-8 pt-8">
+              {/* Book cover with decorative pattern panel behind it */}
+              <div className="relative">
+                {/* Decorative pattern panel — offset behind the book */}
+                <div 
+                  className="absolute inset-0 translate-x-[-49px] translate-y-[-20px]"
+                  style={{
+                    backgroundImage: `url('/images/pattern.png')`,
+                    backgroundSize: '280px 280px',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'repeat',
+                  }}
                 />
+                <div 
+                  className="relative z-10"
+                  style={{
+                    filter: 'drop-shadow(0px 8.93px 11.9px rgba(10, 13, 18, 0.08)) drop-shadow(0px 2.98px 4.46px rgba(10, 13, 18, 0.03))'
+                  }}
+                >
+                  <img 
+                    src="/images/unparalled-poetry-book-cover.png"
+                    alt="Unparalleled Poetry book cover"
+                    className="w-[240px] sm:w-[280px] lg:w-[311px] h-auto"
+                  />
+                </div>
               </div>
             </div>
 
