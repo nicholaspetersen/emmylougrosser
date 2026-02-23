@@ -9,8 +9,12 @@ export default function Newsletter() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Stub: In production, this would connect to an email service
     if (email) {
+      // Submit the form
+      const form = e.target as HTMLFormElement;
+      form.submit();
+      
+      // Show success message and clear input
       setStatus("success");
       setEmail("");
     }
@@ -32,16 +36,22 @@ export default function Newsletter() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="w-full max-w-[480px]">
+          <form 
+            action="https://mesaglobal.us6.list-manage.com/subscribe/post?u=8c0bd5bec630e48dbd14b4efb&id=e4c59ed36d"
+            method="POST"
+            onSubmit={handleSubmit}
+            target="hidden_iframe"
+            className="w-full max-w-[480px]"
+          >
             <div className="flex flex-col sm:flex-row gap-2">
               <div className="flex-1">
-                <label htmlFor="email" className="sr-only">
+                <label htmlFor="mce-EMAIL" className="sr-only">
                   Email address
                 </label>
                 <input
                   type="email"
-                  id="email"
-                  name="email"
+                  id="mce-EMAIL"
+                  name="EMAIL"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
@@ -49,6 +59,8 @@ export default function Newsletter() {
                   className="w-full px-[14px] py-[12px] border border-border bg-white text-foreground placeholder:text-foreground-tertiary shadow-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
               </div>
+              {/* Hidden fields for Mailchimp */}
+              <input type="hidden" name="b_8c0bd5bec630e48dbd14b4efb_e4c59ed36d" value="" />
               <Button type="submit" variant="primary">
                 Subscribe
               </Button>
@@ -60,6 +72,9 @@ export default function Newsletter() {
               </p>
             )}
           </form>
+
+          {/* Hidden iframe to prevent redirect */}
+          <iframe name="hidden_iframe" style={{ display: 'none' }} title="Hidden iframe"></iframe>
         </div>
       </div>
     </section>

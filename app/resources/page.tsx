@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
+import Accordion from "@/components/ui/Accordion";
 
 export const metadata: Metadata = {
   title: "Resources | Dr. Emmylou Grosser",
@@ -61,6 +62,13 @@ const otherResources = [
     type: "Interview",
   },
   {
+    title: "Written for my 7th grader: How does biblical Hebrew poetry work, and why should you care?",
+    description:
+      "An accessible introduction to biblical Hebrew poetry written for a middle school audience, explaining the basics of how it works and why it matters.",
+    type: "Article",
+    note: "Coming soon",
+  },
+  {
     title: "How Lines Matter in Biblical Poetry: The Song of the Sea (Exodus 15:1-18) as a Case Study",
     source: "Bible Translation Conference, Chiang Mai, 2025",
     description:
@@ -78,6 +86,39 @@ const otherResources = [
   },
 ];
 
+const biblicalPoetryQA = [
+  {
+    question: "How does versification work in biblical Hebrew poetry?",
+    answer:
+      "Placeholder content - This answer will cover versification in biblical Hebrew poetry with 2-6 paragraphs of detailed explanation.",
+  },
+  {
+    question: "In what ways are you reorienting biblical poetry scholarship?",
+    answer:
+      "Placeholder content - This answer will discuss the reorientation of biblical poetry scholarship with 2-6 paragraphs of detailed explanation.",
+  },
+  {
+    question: "What is problematic about parallelism?",
+    answer:
+      "Placeholder content - This answer will address the problems with parallelism with 2-6 paragraphs of detailed explanation.",
+  },
+  {
+    question: "How do I do the kind of reading you're proposing in Unparalleled Poetry?",
+    answer:
+      "Placeholder content - This answer will explain the reading approach proposed in Unparalleled Poetry with 2-6 paragraphs of detailed explanation.",
+  },
+  {
+    question: "Does a biblical poem have just one structure, or can different readers hear different structures in the same poem?",
+    answer:
+      "Placeholder content - This answer will explore whether poems have single or multiple structures with 2-6 paragraphs of detailed explanation.",
+  },
+  {
+    question: "Can we use the Masoretic accents to determine poetic structure?",
+    answer:
+      "Placeholder content - This answer will discuss the role of Masoretic accents in determining poetic structure with 2-6 paragraphs of detailed explanation.",
+  },
+];
+
 export default function ResourcesPage() {
   return (
     <>
@@ -92,7 +133,7 @@ export default function ResourcesPage() {
         {/* Selected Publications */}
         <section className="bg-background-secondary py-16 lg:py-24">
           <div className="mx-auto max-w-[1280px] px-8">
-            <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground">
+            <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground text-center">
               Selected Publications
             </h2>
 
@@ -198,10 +239,34 @@ export default function ResourcesPage() {
           </div>
         </section>
 
-        {/* Other Resources */}
+        {/* Biblical Poetry Q&A */}
         <section className="bg-white py-16 lg:py-24">
+          <div className="mx-auto max-w-[1280px] px-6 sm:px-8">
+            <div className="flex flex-col gap-12 lg:gap-16 items-center">
+              {/* Section Header */}
+              <div className="text-center max-w-[900px]">
+                <h2 
+                  className="font-serif font-medium text-[30px] leading-[38px] text-foreground"
+                >
+                  Biblical Poetry Q&A
+                </h2>
+                <p className="mt-4 text-lg text-foreground-secondary">
+                  Common questions about biblical Hebrew poetry and my research approach
+                </p>
+              </div>
+
+              {/* Accordion */}
+              <div className="w-full max-w-[700px]">
+                <Accordion items={biblicalPoetryQA} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Other Resources */}
+        <section className="bg-background-secondary py-16 lg:py-24">
           <div className="mx-auto max-w-[1280px] px-8">
-            <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground">
+            <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground text-center">
               Other Resources
             </h2>
 
@@ -241,6 +306,21 @@ export default function ResourcesPage() {
                             strokeLinejoin="round"
                             strokeWidth={2}
                             d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                          />
+                        </svg>
+                      )}
+                      {resource.type === "Article" && (
+                        <svg
+                          className="w-5 h-5 text-primary"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                           />
                         </svg>
                       )}

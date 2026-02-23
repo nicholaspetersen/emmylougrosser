@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
@@ -41,29 +42,18 @@ export default function BioPage() {
         <section className="bg-background-secondary py-16 lg:py-24">
           <div className="mx-auto max-w-[1280px] px-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-              {/* Photo placeholder */}
+              {/* Photo */}
               <div className="lg:col-span-1 max-w-[580px]">
-                <div className="aspect-[3/4] bg-white rounded-2xl shadow-xs overflow-hidden">
-                  <div className="h-full flex items-center justify-center">
-                    <div className="text-center">
-                      <svg
-                        className="mx-auto h-24 w-24 text-foreground-secondary/30"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1}
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
-                      <p className="mt-2 text-sm text-foreground-secondary/50">
-                        Dr. Emmylou J. Grosser
-                      </p>
-                    </div>
-                  </div>
+                <div className="relative aspect-[4/3] lg:aspect-[3/4] bg-white shadow-xs overflow-hidden">
+                  <Image
+                    src="/images/emmylou-grosser-desk.jpg"
+                    alt="Dr. Emmylou J. Grosser"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 580px"
+                    className="object-cover"
+                    style={{ objectPosition: '65% top' }}
+                    priority
+                  />
                 </div>
               </div>
 

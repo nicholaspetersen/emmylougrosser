@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/bio", label: "Bio" },
   { href: "/resources", label: "Resources" },
+  { href: "/workshops", label: "Workshops" },
   { href: "/projects", label: "Projects" },
   { href: "/support", label: "Support" },
   { href: "/contact", label: "Contact" },
@@ -64,10 +65,10 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-[8px] py-[4px] rounded-lg text-base font-normal transition-colors ${
+                className={`px-[8px] py-[4px] rounded-lg text-base transition-colors ${
                   pathname === link.href
-                    ? "text-primary"
-                    : "text-black hover:text-foreground-secondary"
+                    ? "text-primary font-semibold"
+                    : "text-black font-normal hover:text-foreground-secondary"
                 }`}
               >
                 {link.label}

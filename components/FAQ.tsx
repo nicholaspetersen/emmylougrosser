@@ -7,9 +7,19 @@ const faqItems = [
       "Biblical poetry comprises roughly one-third of the Hebrew Bible and includes some of its most powerful and beloved texts. Understanding how Hebrew poetry works—its structures, rhythms, and effects—helps us read and interpret these texts more faithfully. It also opens up the aesthetic dimension of Scripture, allowing us to experience its artistry as ancient audiences did.",
   },
   {
+    question: "Do I need to read Hebrew to appreciate biblical poetry?",
+    answer:
+      "BLAH BLAH (I'm still figuring out how to write this). placeholder content for now.",
+  },
+  {
     question: "Who is this website for?",
     answer:
       "This website is for anyone interested in the literary artistry of the Bible—scholars, students, translators, pastors, and curious readers. Whether you're conducting academic research, preparing a sermon, or simply want to deepen your appreciation of Scripture's poetry, you'll find resources here to help.",
+  },
+  {
+    question: "Can I give input for future content?",
+    answer:
+      "Yes! The resources on this website are for real people in real contexts, best created in partnership. The needs of different audiences are often vastly different, so please reach out about what would best help you in your context. The future content of this website will be shaped by those engaging with it.",
   },
   {
     question: "How is this work funded?",

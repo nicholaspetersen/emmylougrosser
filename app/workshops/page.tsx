@@ -10,21 +10,24 @@ export const metadata: Metadata = {
     "Workshops and presentations on biblical Hebrew poetry by Dr. Emmylou Grosser.",
 };
 
-const workshops = [
+const workshops: Array<{
+  title: string;
+  date: string;
+  description?: string;
+  event?: string;
+  location?: string;
+  cta?: { label: string; href: string };
+}> = [
   {
     title: "Virtual workshops on the Song of the Sea (Exodus 15:1-18)",
     date: "Spring, 2026",
-    description:
-      "Explore the poetic structure and artistry of one of the oldest poems in the Hebrew Bible through interactive virtual sessions.",
-    cta: { label: "Contact for more information", href: "/contact" },
+    cta: { label: "Contact me", href: "/contact" },
   },
   {
     title: "Biblical Hebrew Poetry and Cognitive Strategies",
     event: "Cognitive Linguistics in Biblical Interpretation pre-SBL Workshop",
     location: "Denver, CO",
     date: "Friday, November 20, 2026, 3-6 pm",
-    description:
-      "A hands-on workshop exploring how cognitive approaches can deepen our understanding of biblical Hebrew poetry.",
   },
 ];
 
@@ -46,38 +49,14 @@ export default function WorkshopsPage() {
       <Header />
       <main>
         <PatternHero
-          title="Workshops"
+          title="Biblical Poetry Workshops"
           subtitle="Learn about biblical Hebrew poetry through interactive sessions"
         />
-
-        {/* Workshop Photo Placeholder */}
-        <section className="bg-background-secondary py-12">
-          <div className="mx-auto max-w-[1280px] px-8">
-            <div className="aspect-[21/9] bg-white rounded-2xl shadow-xs overflow-hidden flex items-center justify-center">
-              <div className="text-center">
-                <svg
-                  className="mx-auto h-16 w-16 text-foreground-secondary/30"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                <p className="mt-2 text-sm text-foreground-secondary/50">Workshop Photo</p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Biblical Poetry Workshops */}
         <section className="bg-background-secondary py-16 lg:py-24">
           <div className="mx-auto max-w-[1280px] px-8">
-            <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground">
+            <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground text-center">
               Biblical Poetry Workshops
             </h2>
 
@@ -85,7 +64,7 @@ export default function WorkshopsPage() {
               {workshops.map((workshop, index) => (
                 <article
                   key={index}
-                  className="bg-white rounded-xl p-8 shadow-xs"
+                  className="bg-white p-8 shadow-xs"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                     <div className="flex-1">
@@ -139,9 +118,11 @@ export default function WorkshopsPage() {
                           {workshop.date}
                         </span>
                       </div>
-                      <p className="mt-4 text-foreground-secondary">
-                        {workshop.description}
-                      </p>
+                      {workshop.description && (
+                        <p className="mt-4 text-foreground-secondary">
+                          {workshop.description}
+                        </p>
+                      )}
                     </div>
                     {workshop.cta && (
                       <div className="flex-shrink-0">
@@ -158,15 +139,15 @@ export default function WorkshopsPage() {
         </section>
 
         {/* Upcoming Presentations */}
-        <section className="bg-white py-16 lg:py-24">
+        <section className="bg-background-secondary py-16 lg:py-24">
           <div className="mx-auto max-w-[1280px] px-8">
-            <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground">
+            <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground text-center">
               Upcoming Presentations
             </h2>
 
             <div className="mt-12 space-y-6">
               {upcomingPresentations.map((presentation, index) => (
-                <article key={index} className="bg-background-secondary rounded-xl p-8 border border-border-light">
+                <article key={index} className="bg-white p-8 shadow-xs">
                   <h3 className="font-serif font-medium text-xl lg:text-2xl text-foreground">
                     {presentation.title}
                   </h3>
@@ -216,6 +197,25 @@ export default function WorkshopsPage() {
                   </div>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="bg-primary py-16 lg:py-24">
+          <div className="mx-auto max-w-[1280px] px-8">
+            <div className="max-w-2xl mx-auto text-center">
+              <h2 className="font-serif font-medium text-[30px] leading-[38px] text-white">
+                Interested in a Workshop?
+              </h2>
+              <p className="mt-4 text-lg text-white/80">
+                I offer workshops and presentations on biblical Hebrew poetry for various audiences, from academic conferences to church groups. Let&apos;s discuss how I can serve your community.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" variant="secondary" size="lg">
+                  Get in Touch
+                </Button>
+              </div>
             </div>
           </div>
         </section>

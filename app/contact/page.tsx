@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
@@ -10,6 +11,8 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    organization: "",
+    role: "",
     subject: "",
     message: "",
   });
@@ -27,7 +30,7 @@ export default function ContactPage() {
     // Stub: In production, this would send to a backend
     if (formData.name && formData.email && formData.message) {
       setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", organization: "", role: "", subject: "", message: "" });
     }
   };
 
@@ -42,50 +45,34 @@ export default function ContactPage() {
 
         <section className="bg-background-secondary py-16 lg:py-24">
           <div className="mx-auto max-w-[1280px] px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
               {/* Contact Information */}
-              <div>
+              <div className="lg:col-span-1">
+                {/* Photo */}
+                <div className="relative mb-8 aspect-[4/3] lg:aspect-[3/4] bg-white shadow-xs overflow-hidden lg:block">
+                  <Image
+                    src="/images/emmylou-grosser-standing.jpg"
+                    alt="Dr. Emmylou Grosser"
+                    fill
+                    sizes="400px"
+                    className="object-cover"
+                    style={{ objectPosition: '95% top' }}
+                  />
+                </div>
+                
                 <h2 className="font-serif font-medium text-2xl text-foreground">
                   Let&apos;s Connect
                 </h2>
                 <p className="mt-4 text-foreground-secondary leading-7">
-                  I welcome inquiries about my research, speaking engagements,
-                  workshops, and collaboration opportunities. Please use the form
-                  to send me a message, and I&apos;ll respond as soon as possible.
+                I welcome inquiries about my research, speaking engagements, workshops, and collaboration
+opportunities. This is also where you can share feedback or request resources you would like to
+see on this website. Please use this form to send me a message. 
                 </p>
-
-                <div className="mt-8 space-y-6">
-                  <div className="bg-white  p-6 shadow-xs">
-                    <h3 className="font-semibold text-foreground">
-                      Speaking &amp; Workshops
-                    </h3>
-                    <p className="mt-2 text-foreground-secondary text-sm">
-                      Interested in having me speak at your institution, church, or
-                      conference? I offer presentations on biblical Hebrew poetry
-                      for various audiences, from academic to general.
-                    </p>
-                  </div>
-                  <div className="bg-white p-6 shadow-xs">
-                    <h3 className="font-semibold text-foreground">Research Inquiries</h3>
-                    <p className="mt-2 text-foreground-secondary text-sm">
-                      Have questions about my work on cognitive poetics and biblical
-                      poetry? I&apos;m happy to discuss research topics and potential
-                      collaborations.
-                    </p>
-                  </div>
-                  <div className="bg-white p-6 shadow-xs">
-                    <h3 className="font-semibold text-foreground">Media &amp; Interviews</h3>
-                    <p className="mt-2 text-foreground-secondary text-sm">
-                      For podcast appearances, interviews, or media inquiries,
-                      please include details about your platform and topic of
-                      interest.
-                    </p>
-                  </div>
-                </div>
               </div>
 
+
               {/* Contact Form */}
-              <div className="bg-white p-8 shadow-xs">
+              <div className="bg-white p-8 shadow-xs lg:col-span-2">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label
@@ -122,6 +109,42 @@ export default function ContactPage() {
                       required
                       className="mt-2 block w-full border border-border bg-white px-[14px] py-[12px] text-foreground placeholder:text-foreground-tertiary shadow-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                       placeholder="your@email.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="organization"
+                      className="block text-sm font-medium text-foreground"
+                    >
+                      Organization
+                    </label>
+                    <input
+                      type="text"
+                      id="organization"
+                      name="organization"
+                      value={formData.organization}
+                      onChange={handleChange}
+                      className="mt-2 block w-full border border-border bg-white px-[14px] py-[12px] text-foreground placeholder:text-foreground-tertiary shadow-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="Your organization"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="role"
+                      className="block text-sm font-medium text-foreground"
+                    >
+                      Role
+                    </label>
+                    <input
+                      type="text"
+                      id="role"
+                      name="role"
+                      value={formData.role}
+                      onChange={handleChange}
+                      className="mt-2 block w-full border border-border bg-white px-[14px] py-[12px] text-foreground placeholder:text-foreground-tertiary shadow-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="Your role"
                     />
                   </div>
 

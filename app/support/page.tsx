@@ -18,9 +18,9 @@ const supportWays = [
     icon: "share",
   },
   {
-    title: "Invite Me to Speak",
+    title: "Provide Feedback",
     description:
-      "Bring insights into biblical Hebrew poetry to your institution, church, or conference. I offer workshops, lectures, and seminars for various audiences.",
+      "Tell me about what’s useful and what you’d like to see on this website.",
     icon: "speak",
   },
   {
