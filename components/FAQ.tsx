@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: "How is this work funded?",
     answer:
-      "This work is funded through a combination of institutional support, grants, and generous donations from individuals who believe in making biblical scholarship accessible. Your contributions help create open-access resources for researchers,educators, translators, and students worldwide.",
+      "This work is funded through a combination of institutional support, grants, and generous donations from individuals who believe in making biblical scholarship accessible. Your contributions help create open-access resources for researchers, educators, translators, and students worldwide.",
   },
 ];
 
