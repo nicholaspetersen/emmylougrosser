@@ -4,12 +4,13 @@ import { useState } from "react";
 
 interface AccordionItemProps {
   question: string;
-  answer: string;
+  answer: string | string[];
   isOpen: boolean;
   onToggle: () => void;
 }
 
 function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProps) {
+  const paragraphs = Array.isArray(answer) ? answer : [answer];
   return (
     <div className="bg-white border border-border-light shadow-xs">
       <button
@@ -43,19 +44,23 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
       </button>
       <div
         className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? "max-h-96" : "max-h-0"
+          isOpen ? "max-h-[600px]" : "max-h-0"
         }`}
       >
-        <p className="px-4 lg:px-5 pb-4 lg:pb-5 text-sm lg:text-base text-foreground-secondary leading-relaxed">
-          {answer}
-        </p>
+        <div className="px-4 lg:px-5 pb-4 lg:pb-5 flex flex-col gap-3">
+          {paragraphs.map((para, i) => (
+            <p key={i} className="text-sm lg:text-base text-foreground-secondary leading-relaxed">
+              {para}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 interface AccordionProps {
-  items: { question: string; answer: string }[];
+  items: { question: string; answer: string | string[] }[];
 }
 
 export default function Accordion({ items }: AccordionProps) {

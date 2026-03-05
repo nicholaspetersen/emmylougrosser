@@ -27,7 +27,8 @@ const workshops: Array<{
     title: "Biblical Hebrew Poetry and Cognitive Strategies",
     event: "Cognitive Linguistics in Biblical Interpretation pre-SBL Workshop",
     location: "Denver, CO",
-    date: "Friday, November 20, 2026, 3-6 pm",
+    date: "Friday, November 20, 2026, 3\u20136 pm",
+    cta: { label: "More info coming soon", href: "" },
   },
 ];
 
@@ -36,7 +37,7 @@ const upcomingPresentations = [
     title:
       "Building on Unparalleled Poetry: Contributions and Ongoing Research Questions for Biblical Hebrew Poetry",
     event:
-      "'My tongue is the pen of a skillful scribe': Poetics, Performance, and Philology",
+      "\u2018My tongue is the pen of a skillful scribe\u2019: Poetics, Performance, and Philology",
     organizer: "Centre for the Study of the Bible",
     location: "Oriel College, University of Oxford",
     date: "Sunday, April 26, 2026",
@@ -60,13 +61,13 @@ export default function WorkshopsPage() {
               Biblical Poetry Workshops
             </h2>
 
-            <div className="mt-12 space-y-6">
+            <div className={`mt-12 grid grid-cols-1 gap-6 ${workshops.length === 2 ? "lg:grid-cols-2" : workshops.length >= 3 ? "lg:grid-cols-3" : ""}`}>
               {workshops.map((workshop, index) => (
                 <article
                   key={index}
-                  className="bg-white p-8 shadow-xs"
+                  className="bg-white p-8 shadow-xs flex flex-col"
                 >
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                  <div className="flex flex-col gap-6 flex-1">
                     <div className="flex-1">
                       <h3 className="font-serif font-medium text-xl lg:text-2xl text-foreground">
                         {workshop.title}
@@ -126,9 +127,15 @@ export default function WorkshopsPage() {
                     </div>
                     {workshop.cta && (
                       <div className="flex-shrink-0">
-                        <Button href={workshop.cta.href} variant="primary">
-                          {workshop.cta.label}
-                        </Button>
+                        {workshop.cta.href ? (
+                          <Button href={workshop.cta.href} variant="primary">
+                            {workshop.cta.label}
+                          </Button>
+                        ) : (
+                          <span className="inline-flex items-center justify-center px-[18px] py-[12px] text-base leading-6 border border-border text-foreground-secondary bg-background-secondary cursor-default opacity-60">
+                            {workshop.cta.label}
+                          </span>
+                        )}
                       </div>
                     )}
                   </div>
@@ -142,7 +149,7 @@ export default function WorkshopsPage() {
         <section className="bg-background-secondary py-16 lg:py-24">
           <div className="mx-auto max-w-[1280px] px-8">
             <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground text-center">
-              Upcoming Presentations
+              Upcoming Papers and Presentations
             </h2>
 
             <div className="mt-12 space-y-6">

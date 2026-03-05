@@ -239,29 +239,7 @@ export default function ResourcesPage() {
           </div>
         </section>
 
-        {/* Biblical Poetry Q&A */}
-        <section className="bg-white py-16 lg:py-24">
-          <div className="mx-auto max-w-[1280px] px-6 sm:px-8">
-            <div className="flex flex-col gap-12 lg:gap-16 items-center">
-              {/* Section Header */}
-              <div className="text-center max-w-[900px]">
-                <h2 
-                  className="font-serif font-medium text-[30px] leading-[38px] text-foreground"
-                >
-                  Biblical Poetry Q&A
-                </h2>
-                <p className="mt-4 text-lg text-foreground-secondary">
-                  Common questions about biblical Hebrew poetry and my research approach
-                </p>
-              </div>
-
-              {/* Accordion */}
-              <div className="w-full max-w-[700px]">
-                <Accordion items={biblicalPoetryQA} />
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Biblical Poetry Q&A — hidden until long-form content is ready */}
 
         {/* Other Resources */}
         <section className="bg-background-secondary py-16 lg:py-24">
