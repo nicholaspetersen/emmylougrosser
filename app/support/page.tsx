@@ -70,7 +70,7 @@ export default function SupportPage() {
                   </p>
                 </div>
                 <div className="sm:flex-shrink-0">
-                  <Button href="#" variant="outline" external>
+                  <Button href="https://www.gofundme.com/f/make-unparalleled-poetry-open-access" variant="outline" external>
                     Give via GoFundMe
                   </Button>
                 </div>
