@@ -25,12 +25,23 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Stub: In production, this would send to a backend
-    if (formData.name && formData.email && formData.message) {
-      setStatus("success");
-      setFormData({ name: "", email: "", organization: "", role: "", subject: "", message: "" });
+    setStatus("idle");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", organization: "", role: "", subject: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
     }
   };
 
@@ -195,6 +206,13 @@ see on this website. Please use this form to send me a message.
                     <div className="rounded-lg bg-green-50 p-4">
                       <p className="text-sm text-green-800">
                         Thank you for your message! I&apos;ll be in touch soon.
+                      </p>
+                    </div>
+                  )}
+                  {status === "error" && (
+                    <div className="rounded-lg bg-red-50 p-4">
+                      <p className="text-sm text-red-800">
+                        Something went wrong. Please try again or email directly.
                       </p>
                     </div>
                   )}
