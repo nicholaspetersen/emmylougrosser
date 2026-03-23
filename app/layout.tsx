@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   title: "Dr. Emmylou Grosser | Biblical Hebrew Poetry Scholar",
   description:
     "Dr. Emmylou Grosser is a scholar specializing in biblical Hebrew poetry, cognitive poetics, and linguistics. Author of Unparalleled Poetry (Oxford University Press, 2023).",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
