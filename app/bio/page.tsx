@@ -131,8 +131,8 @@ export default function BioPage() {
               <p className="mt-4 text-lg text-white/80">
               Explore my publications and resources on biblical Hebrew poetry.              </p>
               <div className="mt-8">
-              <Button href="/contact" variant="outline">
-                      Get in Touch
+              <Button href="/resources" variant="outline">
+                      Explore Resources
                     </Button>
               </div>
             </div>

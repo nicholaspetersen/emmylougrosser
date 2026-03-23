@@ -25,7 +25,7 @@ export default function SupportCTA() {
             </h2>
             <p className="text-lg lg:text-xl leading-7 lg:leading-[30px] text-foreground-secondary">
               Your contribution helps fund the creation of open-access resources
-              for educators, translators, and students worldwide.
+              for researchers, educators, translators, and students worldwide.
             </p>
           </div>
           <div className="flex gap-3">

@@ -30,31 +30,10 @@ export default function SupportPage() {
             </h2>
             <p className="mt-4 text-lg leading-7 text-foreground-secondary">
               I am passionate about making biblical poetry scholarship freely available to educators
-              and readers around the world. There are two ways to give — choose whichever works best for you.
+              and readers around the world. There are two ways to give — a short-term project and a long-term fund.
             </p>
 
             <div className="mt-12 space-y-0 divide-y divide-border">
-              {/* Mesa Global */}
-              <div className="py-8 flex flex-col sm:flex-row sm:items-start gap-6">
-                <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10 flex-shrink-0 mt-1">
-                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                  </svg>
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-xl text-foreground">Tax-Deductible Gift</h3>
-                  <p className="mt-1 text-sm font-medium text-accent">via Mesa Global</p>
-                  <p className="mt-3 text-foreground-secondary">
-                    Give through Mesa Global to support ongoing open-access resource development. This fund is ongoing and tax-deductible for US donors.
-                  </p>
-                </div>
-                <div className="sm:flex-shrink-0">
-                  <Button href="https://www.mesaglobal.co/projects/68046" variant="primary" external>
-                    Give via Mesa Global
-                  </Button>
-                </div>
-              </div>
-
               {/* GoFundMe */}
               <div className="py-8 flex flex-col sm:flex-row sm:items-start gap-6">
                 <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10 flex-shrink-0 mt-1">
@@ -70,8 +49,29 @@ export default function SupportPage() {
                   </p>
                 </div>
                 <div className="sm:flex-shrink-0">
-                  <Button href="https://www.gofundme.com/f/make-unparalleled-poetry-open-access" variant="outline" external>
+                  <Button href="https://www.gofundme.com/f/make-unparalleled-poetry-open-access" variant="primary" external>
                     Give via GoFundMe
+                  </Button>
+                </div>
+              </div>
+
+              {/* Mesa Global */}
+              <div className="py-8 flex flex-col sm:flex-row sm:items-start gap-6">
+                <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10 flex-shrink-0 mt-1">
+                  <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-xl text-foreground">Support the Ongoing Open-Access Resource Development of this Website</h3>
+                  <p className="mt-1 text-sm font-medium text-accent">via Mesa Global</p>
+                  <p className="mt-3 text-foreground-secondary">
+                    I provide these resources as a Mesa Scholar under the auspices of Mesa Global, a Christian organization committed to equipping the global church and its leaders. Gifts to this fund are tax-deductible for US donors and sustain and expand the work of this website.
+                  </p>
+                </div>
+                <div className="sm:flex-shrink-0">
+                  <Button href="https://www.mesaglobal.co/projects/68046" variant="outline" external>
+                    Give via Mesa Global
                   </Button>
                 </div>
               </div>

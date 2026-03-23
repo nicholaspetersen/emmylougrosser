@@ -32,7 +32,14 @@ const workshops: Array<{
   },
 ];
 
-const upcomingPresentations = [
+const upcomingPresentations: Array<{
+  title: string;
+  event: string;
+  organizer: string;
+  location: string;
+  date: string;
+  link?: { label: string; url: string };
+}> = [
   {
     title:
       "Building on Unparalleled Poetry: Contributions and Ongoing Research Questions for Biblical Hebrew Poetry",
@@ -41,6 +48,10 @@ const upcomingPresentations = [
     organizer: "Centre for the Study of the Bible",
     location: "Oriel College, University of Oxford",
     date: "Sunday, April 26, 2026",
+    link: {
+      label: "Centre for the Study of the Bible",
+      url: "https://www.theology.ox.ac.uk/centre-for-the-study-of-the-bible",
+    },
   },
 ];
 
@@ -50,8 +61,8 @@ export default function WorkshopsPage() {
       <Header />
       <main>
         <PatternHero
-          title="Biblical Poetry Workshops"
-          subtitle="Learn about biblical Hebrew poetry through interactive sessions"
+          title="Workshops and Presentations"
+          subtitle="Interactive sessions and upcoming papers and presentations"
         />
 
         {/* Biblical Poetry Workshops */}
@@ -202,6 +213,13 @@ export default function WorkshopsPage() {
                       {presentation.date}
                     </span>
                   </div>
+                  {presentation.link && (
+                    <div className="mt-4">
+                      <Button href={presentation.link.url} variant="primary" external>
+                        Learn More
+                      </Button>
+                    </div>
+                  )}
                 </article>
               ))}
             </div>
@@ -216,7 +234,7 @@ export default function WorkshopsPage() {
                 Interested in a Workshop?
               </h2>
               <p className="mt-4 text-lg text-white/80">
-                I offer workshops and presentations on biblical Hebrew poetry for various audiences, from academic conferences to church groups. Let&apos;s discuss how I can serve your community.
+                I&apos;m developing workshops on biblical Hebrew poetry for various audiences, from academics to translators to poetry-loving lay people. Let&apos;s discuss how I can serve your community.
               </p>
               <div className="mt-8">
                 <Button href="/contact" variant="secondary" size="lg">

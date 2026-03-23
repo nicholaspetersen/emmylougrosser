@@ -174,10 +174,10 @@ see on this website. Please use this form to send me a message.
                       className="mt-2 block w-full border border-border bg-white px-[14px] py-[12px] text-foreground shadow-xs focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
                       <option value="">Select a topic...</option>
+                      <option value="research">Research Question</option>
                       <option value="speaking">Speaking Engagement</option>
                       <option value="workshop">Workshop Inquiry</option>
-                      <option value="research">Research Question</option>
-                      <option value="media">Media/Interview</option>
+                      <option value="feedback">Feedback/Resource Request</option>
                       <option value="support">Support/Partnership</option>
                       <option value="other">Other</option>
                     </select>

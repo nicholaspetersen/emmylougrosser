@@ -36,9 +36,9 @@ const projects = [
     icon: "accents",
   },
   {
-    title: "Poetics of biblical narrative",
+    title: "Nonlinearity in biblical narrative",
     description:
-      "Exploring the Song of the Sea (Exodus 15:1-18) in its narrative context, examining how poetic and narrative elements interact and enhance each other.",
+      "The multidimensional arrangement of the narrative of the Song of the Sea (Exodus 15:1-21)",
     icon: "narrative",
   },
 ];
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
       <main>
         <PatternHero
           title="Projects"
-          subtitle="Current research in biblical Hebrew poetry"
+          subtitle="Current biblical poetry research and cross-disciplinary projects"
         />
 
         <section className="bg-background-secondary py-16 lg:py-24">
@@ -186,8 +186,7 @@ export default function ProjectsPage() {
                 Interested in Collaboration?
               </h2>
               <p className="mt-4 text-lg text-white/80">
-                I welcome opportunities to collaborate with scholars working on
-                biblical poetry, cognitive linguistics, or related fields.
+                I welcome opportunities to collaborate with scholars across disciplines on work related to biblical poetry and cognitive poetics.
               </p>
               <div className="mt-8">
                 <Button
