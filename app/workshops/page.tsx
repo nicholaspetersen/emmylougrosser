@@ -50,7 +50,7 @@ const upcomingPresentations: Array<{
     date: "Sunday, April 26, 2026",
     link: {
       label: "Centre for the Study of the Bible",
-      url: "https://www.theology.ox.ac.uk/centre-for-the-study-of-the-bible",
+      url: "https://www.centreforbible.oriel.ox.ac.uk/events/my-tongue-is-the-pen-of-a-skillful-scribe-poetics-performance-and-philology/",
     },
   },
 ];
