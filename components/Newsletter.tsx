@@ -73,7 +73,7 @@ export default function Newsletter() {
             )}
           </form>
 
-          {/* Hidden iframe to prevent redirect */}
+          {/* Hidden iframe to prevent redirect — must be outside the form */}
           <iframe name="hidden_iframe" style={{ display: 'none' }} title="Hidden iframe"></iframe>
         </div>
       </div>
