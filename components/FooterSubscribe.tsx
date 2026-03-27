@@ -7,12 +7,13 @@ export default function FooterSubscribe() {
   const [status, setStatus] = useState<"idle" | "success">("idle");
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
     if (email) {
-      const form = e.target as HTMLFormElement;
-      form.submit();
-      setStatus("success");
-      setEmail("");
+      setTimeout(() => {
+        setStatus("success");
+        setEmail("");
+      }, 500);
+    } else {
+      e.preventDefault();
     }
   };
 

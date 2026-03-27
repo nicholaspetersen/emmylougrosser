@@ -8,15 +8,13 @@ export default function Newsletter() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
     if (email) {
-      // Submit the form
-      const form = e.target as HTMLFormElement;
-      form.submit();
-      
-      // Show success message and clear input
-      setStatus("success");
-      setEmail("");
+      setTimeout(() => {
+        setStatus("success");
+        setEmail("");
+      }, 500);
+    } else {
+      e.preventDefault();
     }
   };
 
