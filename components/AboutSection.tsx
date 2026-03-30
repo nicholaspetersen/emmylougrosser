@@ -1,7 +1,17 @@
 import Image from "next/image";
 import Button from "./ui/Button";
+import { safeFetch } from "@/sanity/lib/client";
+import { siteSettingsQuery } from "@/sanity/lib/queries";
+import type { SiteSettings } from "@/sanity/lib/types";
 
-export default function AboutSection() {
+export default async function AboutSection() {
+  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
+
+  const bioParagraphs = settings?.aboutBio ?? [
+    "I\u2019m a biblical scholar and the author of Unparalleled Poetry, a book that challenges readers to move beyond the limited framework of parallelism and adopt a new framework that does justice to the multidimensional patterning of the free-rhythm poetry of the Hebrew Bible.",
+    "I love studying the verbal art of the Bible, and I\u2019ve created this space to share my research and resources built from it.",
+  ];
+
   return (
     <section className="bg-background-secondary py-16 lg:py-24 overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-6 sm:px-8">
@@ -28,17 +38,9 @@ export default function AboutSection() {
                 About Dr. Grosser
               </h2>
               <div className="text-base lg:text-lg leading-7 text-foreground-secondary space-y-4 lg:space-y-5">
-                <p>
-                  I&apos;m a biblical scholar and the author of <em>Unparalleled Poetry</em>, a
-                  book that challenges readers to move beyond the limited framework
-                  of parallelism and adopt a new framework that does justice to the
-                  multidimensional patterning of the free-rhythm poetry of the
-                  Hebrew Bible.
-                </p>
-                <p>
-                  I love studying the verbal art of the Bible, and I&apos;ve created
-                  this space to share my research and resources built from it.
-                </p>
+                {bioParagraphs.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
               </div>
               <div className="mt-1">
                 <Button href="/bio" variant="outline">

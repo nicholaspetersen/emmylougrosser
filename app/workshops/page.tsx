@@ -3,6 +3,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
+import { safeFetch } from "@/sanity/lib/client";
+import { workshopsQuery, presentationsQuery } from "@/sanity/lib/queries";
+import type { Workshop, Presentation } from "@/sanity/lib/types";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Workshops | Dr. Emmylou Grosser",
@@ -10,52 +15,12 @@ export const metadata: Metadata = {
     "Workshops and presentations on biblical Hebrew poetry by Dr. Emmylou Grosser.",
 };
 
-const workshops: Array<{
-  title: string;
-  date: string;
-  description?: string;
-  event?: string;
-  location?: string;
-  cta?: { label: string; href: string };
-}> = [
-  {
-    title: "Virtual workshops on the Song of the Sea (Exodus 15:1-18)",
-    date: "Spring, 2026",
-    cta: { label: "Contact me", href: "/contact" },
-  },
-  {
-    title: "Biblical Hebrew Poetry and Cognitive Strategies",
-    event: "Cognitive Linguistics in Biblical Interpretation pre-SBL Workshop",
-    location: "Denver, CO",
-    date: "Friday, November 20, 2026, 3\u20136 pm",
-    cta: { label: "More info coming soon", href: "" },
-  },
-];
+export default async function WorkshopsPage() {
+  const [workshops, upcomingPresentations] = await Promise.all([
+    safeFetch<Workshop[]>(workshopsQuery, []),
+    safeFetch<Presentation[]>(presentationsQuery, []),
+  ]);
 
-const upcomingPresentations: Array<{
-  title: string;
-  event: string;
-  organizer: string;
-  location: string;
-  date: string;
-  link?: { label: string; url: string };
-}> = [
-  {
-    title:
-      "Building on Unparalleled Poetry: Contributions and Ongoing Research Questions for Biblical Hebrew Poetry",
-    event:
-      "\u2018My tongue is the pen of a skillful scribe\u2019: Poetics, Performance, and Philology",
-    organizer: "Centre for the Study of the Bible",
-    location: "Oriel College, University of Oxford",
-    date: "Sunday, April 26, 2026",
-    link: {
-      label: "Centre for the Study of the Bible",
-      url: "https://www.centreforbible.oriel.ox.ac.uk/events/my-tongue-is-the-pen-of-a-skillful-scribe-poetics-performance-and-philology/",
-    },
-  },
-];
-
-export default function WorkshopsPage() {
   return (
     <>
       <Header />
@@ -73,9 +38,9 @@ export default function WorkshopsPage() {
             </h2>
 
             <div className={`mt-12 grid grid-cols-1 gap-6 ${workshops.length === 2 ? "lg:grid-cols-2" : workshops.length >= 3 ? "lg:grid-cols-3" : ""}`}>
-              {workshops.map((workshop, index) => (
+              {workshops.map((workshop) => (
                 <article
-                  key={index}
+                  key={workshop._id}
                   className="bg-white p-8 shadow-xs flex flex-col"
                 >
                   <div className="flex flex-col gap-6 flex-1">
@@ -164,8 +129,8 @@ export default function WorkshopsPage() {
             </h2>
 
             <div className="mt-12 space-y-6">
-              {upcomingPresentations.map((presentation, index) => (
-                <article key={index} className="bg-white p-8 shadow-xs">
+              {upcomingPresentations.map((presentation) => (
+                <article key={presentation._id} className="bg-white p-8 shadow-xs">
                   <h3 className="font-serif font-medium text-xl lg:text-2xl text-foreground">
                     {presentation.title}
                   </h3>

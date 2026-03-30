@@ -3,6 +3,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
+import { safeFetch } from "@/sanity/lib/client";
+import { projectsQuery } from "@/sanity/lib/queries";
+import type { Project } from "@/sanity/lib/types";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Projects | Dr. Emmylou Grosser",
@@ -10,40 +15,9 @@ export const metadata: Metadata = {
     "Current research projects in biblical Hebrew poetry by Dr. Emmylou Grosser.",
 };
 
-const projects = [
-  {
-    title: "Poetics of biblical poetry",
-    description:
-      "The structure and artistry of the Song of the Sea (Exodus 15:1-18), including a forthcoming article in the REPAC Symposium Proceedings, \"Textual Repetition and Creativity in Ancient Mesopotamia, Israel, Egypt and China\" (Universität Wien, February 2024)",
-    links: [
-      {
-        label: "REPAC Project",
-        url: "https://ucrisportal.univie.ac.at/en/projects/repetition-parallelism-and-creativity-an-inquiry-into-the-constru/",
-      },
-    ],
-    icon: "poetry",
-  },
-  {
-    title: "Biblical Hebrew poetry and the Masoretic accents",
-    description:
-      "The interface of poetic structure and the Masoretic accents from a prosodic phonological framework, a collaborative research project.",
-    collaborators: [
-      {
-        name: "Dr. Sophia Pitcher",
-        url: "https://ufs.academia.edu/SophiaPitcher",
-      },
-    ],
-    icon: "accents",
-  },
-  {
-    title: "Nonlinearity in biblical narrative",
-    description:
-      "The multidimensional arrangement of the narrative of the Song of the Sea (Exodus 15:1-21)",
-    icon: "narrative",
-  },
-];
+export default async function ProjectsPage() {
+  const projects = await safeFetch<Project[]>(projectsQuery, []);
 
-export default function ProjectsPage() {
   return (
     <>
       <Header />
@@ -60,12 +34,11 @@ export default function ProjectsPage() {
             </h2>
 
             <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {projects.map((project, index) => (
+              {projects.map((project) => (
                 <article
-                  key={index}
+                  key={project._id}
                   className="bg-white p-8 shadow-xs flex flex-col"
                 >
-                  {/* Icon with background circle */}
                   <div className="mb-6">
                     <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10">
                       {project.icon === "poetry" && (
@@ -123,7 +96,7 @@ export default function ProjectsPage() {
                     {project.description}
                   </p>
 
-                  {project.collaborators && (
+                  {project.collaborators && project.collaborators.length > 0 && (
                     <div className="mt-6">
                       <p className="text-sm text-foreground-tertiary">
                         Collaborator{project.collaborators.length > 1 ? "s" : ""}:

@@ -3,6 +3,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
+import { safeFetch } from "@/sanity/lib/client";
+import { siteSettingsQuery } from "@/sanity/lib/queries";
+import type { SiteSettings } from "@/sanity/lib/types";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Support | Dr. Emmylou Grosser",
@@ -10,8 +15,13 @@ export const metadata: Metadata = {
     "Support open-access scholarship in biblical Hebrew poetry. Learn how you can help make these insights freely available.",
 };
 
+export default async function SupportPage() {
+  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
 
-export default function SupportPage() {
+  const gofundmeUrl = settings?.gofundmeUrl ?? 'https://www.gofundme.com/f/make-unparalleled-poetry-open-access';
+  const mesaGlobalUrl = settings?.mesaGlobalUrl ?? 'https://www.mesaglobal.co/projects/68046';
+  const progress = settings?.featuredBookProgress ?? 40;
+
   return (
     <>
       <Header />
@@ -45,11 +55,11 @@ export default function SupportPage() {
                   <h3 className="font-semibold text-xl text-foreground">Make <em>Unparalleled Poetry</em> Open Access</h3>
                   <p className="mt-1 text-sm font-medium text-accent">via GoFundMe</p>
                   <p className="mt-3 text-foreground-secondary">
-                    Help make this book free to download for readers everywhere. If 46 people donate the cost of one book ($115), <em>Unparalleled Poetry</em> will become open access. We&apos;re already 40% of the way there!
+                    Help make this book free to download for readers everywhere. If 46 people donate the cost of one book ($115), <em>Unparalleled Poetry</em> will become open access. We&apos;re already {progress}% of the way there!
                   </p>
                 </div>
                 <div className="sm:flex-shrink-0">
-                  <Button href="https://www.gofundme.com/f/make-unparalleled-poetry-open-access" variant="primary" external>
+                  <Button href={gofundmeUrl} variant="primary" external>
                     Give via GoFundMe
                   </Button>
                 </div>
@@ -70,7 +80,7 @@ export default function SupportPage() {
                   </p>
                 </div>
                 <div className="sm:flex-shrink-0">
-                  <Button href="https://www.mesaglobal.co/projects/68046" variant="outline" external>
+                  <Button href={mesaGlobalUrl} variant="outline" external>
                     Give via Mesa Global
                   </Button>
                 </div>

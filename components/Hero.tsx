@@ -1,6 +1,14 @@
 import Button from "./ui/Button";
+import { safeFetch } from "@/sanity/lib/client";
+import { siteSettingsQuery } from "@/sanity/lib/queries";
+import type { SiteSettings } from "@/sanity/lib/types";
 
-export default function Hero() {
+export default async function Hero() {
+  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
+
+  const headline = settings?.heroHeadline ?? "Illuminating the Artistry of Scripture";
+  const subtitle = settings?.heroSubtitle ?? "Research, publications, and resources that illuminate the Bible\u2019s literary artistry.";
+
   return (
     <section className="relative bg-background-secondary min-h-[500px] lg:h-[680px] overflow-hidden isolate">
       {/* Background pattern */}
@@ -39,10 +47,10 @@ export default function Hero() {
               className="font-medium text-[40px] sm:text-[52px] lg:text-[68px] leading-[44px] sm:leading-[56px] lg:leading-[72px] tracking-[-1.36px] text-foreground"
               style={{ fontFamily: 'var(--font-crimson)' }}
             >
-              Illuminating the Artistry of Scripture
+              {headline}
             </h1>
             <p className="text-lg sm:text-xl leading-7 sm:leading-[30px] text-foreground-secondary max-w-[470px]">
-              Research, publications, and resources that illuminate the Bible&apos;s literary artistry.
+              {subtitle}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-start">

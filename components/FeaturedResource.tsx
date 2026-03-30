@@ -1,6 +1,14 @@
 import Button from "./ui/Button";
+import { safeFetch } from "@/sanity/lib/client";
+import { siteSettingsQuery } from "@/sanity/lib/queries";
+import type { SiteSettings } from "@/sanity/lib/types";
 
-export default function FeaturedResource() {
+export default async function FeaturedResource() {
+  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
+
+  const description = settings?.featuredBookDescription ?? "The driving questions of Unparalleled Poetry are, what makes a line a line and a poem a poem, and what strategies do we need in order to read (= hear!) these poems according to their conventions? By highlighting the literary structures and potential effects of biblical Hebrew poetry, I seek to help scholars, translators, and readers across traditions better understand the text and its meaning\u2014and its potential to artistically impact and shape its audiences.";
+  const progress = settings?.featuredBookProgress ?? 40;
+
   return (
     <section className="bg-background-secondary py-16 lg:py-24 overflow-hidden">
       <div className="flex flex-col gap-8 lg:gap-12 items-center">
@@ -22,7 +30,6 @@ export default function FeaturedResource() {
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start justify-center">
             {/* Book Cover with decorative panel */}
             <div className="relative flex-shrink-0 mx-auto lg:mx-0 pl-8 pt-8">
-              {/* Book cover with decorative pattern panel behind it */}
               <div className="relative">
                 {/* Decorative pattern panel — offset behind the book */}
                 <div 
@@ -52,14 +59,7 @@ export default function FeaturedResource() {
             {/* Content */}
             <div className="flex flex-col gap-6 lg:gap-8 max-w-[480px]">
               <p className="text-base lg:text-lg leading-7 text-foreground-secondary">
-                The driving questions of Unparalleled Poetry are, what makes a line
-                a line and a poem a poem, and what strategies do we need in order to
-                read (= hear!) these poems according to their conventions? By
-                highlighting the literary structures and potential effects of
-                biblical Hebrew poetry, I seek to help scholars, translators, and
-                readers across traditions better understand the text and its
-                meaning—and its potential to artistically impact and shape its
-                audiences.
+                {description}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-start">
@@ -78,7 +78,7 @@ export default function FeaturedResource() {
               <p className="text-sm leading-5 text-foreground-secondary">
                 Academic monographs are inaccessible to many scholars globally due
                 to cost. You can help make this book open access (free for download)
-                for readers everywhere. Thanks to a generous gift, we are 40% of the
+                for readers everywhere. Thanks to a generous gift, we are {progress}% of the
                 way there. If 46 people donate the cost of one book ($115),
                 Unparalleled Poetry will become open access!
               </p>
