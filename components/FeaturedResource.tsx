@@ -1,13 +1,13 @@
 import Button from "./ui/Button";
 import { safeFetch } from "@/sanity/lib/client";
-import { siteSettingsQuery } from "@/sanity/lib/queries";
-import type { SiteSettings } from "@/sanity/lib/types";
+import { homePageQuery } from "@/sanity/lib/queries";
+import type { HomePage } from "@/sanity/lib/types";
 
 export default async function FeaturedResource() {
-  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
+  const page = await safeFetch<HomePage | null>(homePageQuery, null);
 
-  const description = settings?.featuredBookDescription ?? "The driving questions of Unparalleled Poetry are, what makes a line a line and a poem a poem, and what strategies do we need in order to read (= hear!) these poems according to their conventions? By highlighting the literary structures and potential effects of biblical Hebrew poetry, I seek to help scholars, translators, and readers across traditions better understand the text and its meaning\u2014and its potential to artistically impact and shape its audiences.";
-  const progress = settings?.featuredBookProgress ?? 40;
+  const description = page?.featuredBookDescription ?? "The driving questions of Unparalleled Poetry are, what makes a line a line and a poem a poem, and what strategies do we need in order to read (= hear!) these poems according to their conventions? By highlighting the literary structures and potential effects of biblical Hebrew poetry, I seek to help scholars, translators, and readers across traditions better understand the text and its meaning\u2014and its potential to artistically impact and shape its audiences.";
+  const progress = page?.featuredBookProgress ?? 40;
 
   return (
     <section className="bg-background-secondary py-16 lg:py-24 overflow-hidden">

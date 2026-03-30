@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Button from "./ui/Button";
 import { safeFetch } from "@/sanity/lib/client";
-import { siteSettingsQuery } from "@/sanity/lib/queries";
-import type { SiteSettings } from "@/sanity/lib/types";
+import { homePageQuery } from "@/sanity/lib/queries";
+import type { HomePage } from "@/sanity/lib/types";
 
 export default async function AboutSection() {
-  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
+  const page = await safeFetch<HomePage | null>(homePageQuery, null);
 
-  const bioParagraphs = settings?.aboutBio ?? [
+  const bioParagraphs = page?.aboutBio ?? [
     "I\u2019m a biblical scholar and the author of Unparalleled Poetry, a book that challenges readers to move beyond the limited framework of parallelism and adopt a new framework that does justice to the multidimensional patterning of the free-rhythm poetry of the Hebrew Bible.",
     "I love studying the verbal art of the Bible, and I\u2019ve created this space to share my research and resources built from it.",
   ];

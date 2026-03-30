@@ -4,8 +4,8 @@ import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
 import { safeFetch } from "@/sanity/lib/client";
-import { siteSettingsQuery } from "@/sanity/lib/queries";
-import type { SiteSettings } from "@/sanity/lib/types";
+import { supportPageQuery } from "@/sanity/lib/queries";
+import type { SupportPage } from "@/sanity/lib/types";
 
 export const revalidate = 3600;
 
@@ -16,11 +16,11 @@ export const metadata: Metadata = {
 };
 
 export default async function SupportPage() {
-  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
+  const page = await safeFetch<SupportPage | null>(supportPageQuery, null);
 
-  const gofundmeUrl = settings?.gofundmeUrl ?? 'https://www.gofundme.com/f/make-unparalleled-poetry-open-access';
-  const mesaGlobalUrl = settings?.mesaGlobalUrl ?? 'https://www.mesaglobal.co/projects/68046';
-  const progress = settings?.featuredBookProgress ?? 40;
+  const gofundmeUrl = page?.gofundmeUrl ?? 'https://www.gofundme.com/f/make-unparalleled-poetry-open-access';
+  const mesaGlobalUrl = page?.mesaGlobalUrl ?? 'https://www.mesaglobal.co/projects/68046';
+  const progress = page?.openAccessProgress ?? 40;
 
   return (
     <>

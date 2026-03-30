@@ -19,20 +19,52 @@ export default defineConfig({
           .title('Content')
           .items([
             S.listItem()
-              .title('Site Settings')
-              .id('siteSettings')
+              .title('Pages')
               .child(
-                S.document()
-                  .schemaType('siteSettings')
-                  .documentId('siteSettings')
+                S.list()
+                  .title('Pages')
+                  .items([
+                    S.listItem()
+                      .title('Home Page')
+                      .id('homePage')
+                      .child(
+                        S.document()
+                          .schemaType('homePage')
+                          .documentId('homePage')
+                      ),
+                    S.listItem()
+                      .title('Bio Page')
+                      .id('bioPage')
+                      .child(
+                        S.document()
+                          .schemaType('bioPage')
+                          .documentId('bioPage')
+                      ),
+                    S.listItem()
+                      .title('Support Page')
+                      .id('supportPage')
+                      .child(
+                        S.document()
+                          .schemaType('supportPage')
+                          .documentId('supportPage')
+                      ),
+                  ])
               ),
             S.divider(),
-            S.documentTypeListItem('workshop').title('Workshops'),
-            S.documentTypeListItem('presentation').title('Presentations'),
-            S.documentTypeListItem('publication').title('Publications'),
-            S.documentTypeListItem('resource').title('Other Resources'),
-            S.documentTypeListItem('project').title('Research Projects'),
-            S.documentTypeListItem('faqItem').title('FAQ Items'),
+            S.listItem()
+              .title('Collections')
+              .child(
+                S.list()
+                  .title('Collections')
+                  .items([
+                    S.documentTypeListItem('workshop').title('Workshops'),
+                    S.documentTypeListItem('presentation').title('Presentations'),
+                    S.documentTypeListItem('publication').title('Publications'),
+                    S.documentTypeListItem('resource').title('Other Resources'),
+                    S.documentTypeListItem('project').title('Research Projects'),
+                    S.documentTypeListItem('faqItem').title('FAQ Items'),
+                  ])
+              ),
           ]),
     }),
     visionTool(),

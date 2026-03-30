@@ -4,14 +4,20 @@ import { publication } from './publication'
 import { resource } from './resource'
 import { project } from './project'
 import { faqItem } from './faqItem'
-import { siteSettings } from './siteSettings'
+import { homePage } from './homePage'
+import { bioPage } from './bioPage'
+import { supportPage } from './supportPage'
 
 export const schemaTypes = [
+  // Page singletons
+  homePage,
+  bioPage,
+  supportPage,
+  // Content collections
   workshop,
   presentation,
   publication,
   resource,
   project,
   faqItem,
-  siteSettings,
 ]

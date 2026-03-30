@@ -61,13 +61,21 @@ export interface Education {
   degrees: string[]
 }
 
-export interface SiteSettings {
+export interface HomePage {
   heroHeadline: string
   heroSubtitle: string
   aboutBio: string[]
   featuredBookDescription: string
   featuredBookProgress: number
+}
+
+export interface BioPage {
+  bioParagraphs: string[]
+  education: Education[]
+}
+
+export interface SupportPage {
   gofundmeUrl: string
   mesaGlobalUrl: string
-  education: Education[]
+  openAccessProgress: number
 }

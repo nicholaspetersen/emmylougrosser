@@ -70,15 +70,27 @@ export const faqItemsQuery = groq`
   }
 `
 
-export const siteSettingsQuery = groq`
-  *[_type == "siteSettings"][0] {
+export const homePageQuery = groq`
+  *[_type == "homePage" && _id == "homePage"][0] {
     heroHeadline,
     heroSubtitle,
     aboutBio,
     featuredBookDescription,
-    featuredBookProgress,
+    featuredBookProgress
+  }
+`
+
+export const bioPageQuery = groq`
+  *[_type == "bioPage" && _id == "bioPage"][0] {
+    bioParagraphs,
+    education
+  }
+`
+
+export const supportPageQuery = groq`
+  *[_type == "supportPage" && _id == "supportPage"][0] {
     gofundmeUrl,
     mesaGlobalUrl,
-    education
+    openAccessProgress
   }
 `

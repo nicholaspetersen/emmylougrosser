@@ -1,13 +1,13 @@
 import Button from "./ui/Button";
 import { safeFetch } from "@/sanity/lib/client";
-import { siteSettingsQuery } from "@/sanity/lib/queries";
-import type { SiteSettings } from "@/sanity/lib/types";
+import { homePageQuery } from "@/sanity/lib/queries";
+import type { HomePage } from "@/sanity/lib/types";
 
 export default async function Hero() {
-  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
+  const page = await safeFetch<HomePage | null>(homePageQuery, null);
 
-  const headline = settings?.heroHeadline ?? "Illuminating the Artistry of Scripture";
-  const subtitle = settings?.heroSubtitle ?? "Research, publications, and resources that illuminate the Bible\u2019s literary artistry.";
+  const headline = page?.heroHeadline ?? "Illuminating the Artistry of Scripture";
+  const subtitle = page?.heroSubtitle ?? "Research, publications, and resources that illuminate the Bible\u2019s literary artistry.";
 
   return (
     <section className="relative bg-background-secondary min-h-[500px] lg:h-[680px] overflow-hidden isolate">

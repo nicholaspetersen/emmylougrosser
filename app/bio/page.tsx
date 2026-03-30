@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
 import { safeFetch } from "@/sanity/lib/client";
-import { siteSettingsQuery } from "@/sanity/lib/queries";
-import type { SiteSettings } from "@/sanity/lib/types";
+import { bioPageQuery } from "@/sanity/lib/queries";
+import type { BioPage } from "@/sanity/lib/types";
 
 export const revalidate = 3600;
 
@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default async function BioPage() {
-  const settings = await safeFetch<SiteSettings | null>(siteSettingsQuery, null);
+  const page = await safeFetch<BioPage | null>(bioPageQuery, null);
 
-  const bioParagraphs = settings?.aboutBio ?? [];
-  const education = settings?.education ?? [];
+  const bioParagraphs = page?.bioParagraphs ?? [];
+  const education = page?.education ?? [];
 
   return (
     <>
