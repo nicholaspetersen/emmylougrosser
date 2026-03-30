@@ -6,11 +6,6 @@ import type { FaqItem } from "@/sanity/lib/types";
 export default async function FAQ() {
   const faqItems = await safeFetch<FaqItem[]>(faqItemsQuery, []);
 
-  const items = faqItems.map((item) => ({
-    question: item.question,
-    answer: Array.isArray(item.answer) ? item.answer : [item.answer],
-  }));
-
   return (
     <section className="bg-background-secondary py-16 lg:py-24">
       <div className="mx-auto max-w-[1280px] px-6 sm:px-8">
@@ -20,7 +15,7 @@ export default async function FAQ() {
             <p className="text-base font-semibold leading-6 text-accent">
               FAQ
             </p>
-            <h2 
+            <h2
               className="mt-2 font-medium text-3xl lg:text-4xl leading-tight lg:leading-[44px] tracking-[-0.72px] text-foreground"
               style={{ fontFamily: 'var(--font-crimson)' }}
             >
@@ -30,7 +25,7 @@ export default async function FAQ() {
 
           {/* Accordion */}
           <div className="w-full max-w-[700px]">
-            <Accordion items={items} />
+            <Accordion items={faqItems} />
           </div>
         </div>
       </div>

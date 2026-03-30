@@ -7,10 +7,10 @@ export const bioPage = defineType({
   fields: [
     defineField({
       name: 'bioParagraphs',
-      title: 'Bio Paragraphs',
+      title: 'Bio',
       type: 'array',
-      of: [{ type: 'text' }],
-      description: 'Each item becomes a paragraph in the bio section',
+      of: [{ type: 'block' }],
+      description: 'Rich text shown in the bio section',
     }),
     defineField({
       name: 'education',

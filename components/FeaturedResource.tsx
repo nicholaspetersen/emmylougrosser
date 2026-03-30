@@ -1,12 +1,17 @@
 import Button from "./ui/Button";
+import { PortableText } from "@portabletext/react";
 import { safeFetch } from "@/sanity/lib/client";
 import { homePageQuery } from "@/sanity/lib/queries";
-import type { HomePage } from "@/sanity/lib/types";
+import type { HomePage, PortableTextBlock } from "@/sanity/lib/types";
 
 export default async function FeaturedResource() {
   const page = await safeFetch<HomePage | null>(homePageQuery, null);
 
-  const description = page?.featuredBookDescription ?? "The driving questions of Unparalleled Poetry are, what makes a line a line and a poem a poem, and what strategies do we need in order to read (= hear!) these poems according to their conventions? By highlighting the literary structures and potential effects of biblical Hebrew poetry, I seek to help scholars, translators, and readers across traditions better understand the text and its meaning\u2014and its potential to artistically impact and shape its audiences.";
+  const fallbackDescription: PortableTextBlock[] = [
+    { _type: "block", _key: "a", style: "normal", markDefs: [], children: [{ _type: "span", _key: "a1", marks: [], text: "The driving questions of Unparalleled Poetry are, what makes a line a line and a poem a poem, and what strategies do we need in order to read (= hear!) these poems according to their conventions? By highlighting the literary structures and potential effects of biblical Hebrew poetry, I seek to help scholars, translators, and readers across traditions better understand the text and its meaning\u2014and its potential to artistically impact and shape its audiences." }] } as PortableTextBlock,
+  ];
+
+  const description = page?.featuredBookDescription ?? fallbackDescription;
   const progress = page?.featuredBookProgress ?? 40;
 
   return (
@@ -58,9 +63,9 @@ export default async function FeaturedResource() {
 
             {/* Content */}
             <div className="flex flex-col gap-6 lg:gap-8 max-w-[480px]">
-              <p className="text-base lg:text-lg leading-7 text-foreground-secondary">
-                {description}
-              </p>
+              <div className="text-base lg:text-lg leading-7 text-foreground-secondary space-y-4 [&_em]:italic [&_strong]:font-semibold [&_a]:underline [&_a]:hover:text-foreground">
+                <PortableText value={description} />
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-start">
                 <Button

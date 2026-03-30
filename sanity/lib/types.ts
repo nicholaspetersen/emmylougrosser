@@ -1,3 +1,7 @@
+import type { PortableTextBlock } from '@portabletext/types'
+
+export type { PortableTextBlock }
+
 export interface Workshop {
   _id: string
   title: string
@@ -53,7 +57,7 @@ export interface Project {
 export interface FaqItem {
   _id: string
   question: string
-  answer: string | string[]
+  answer: PortableTextBlock[]
 }
 
 export interface Education {
@@ -64,13 +68,13 @@ export interface Education {
 export interface HomePage {
   heroHeadline: string
   heroSubtitle: string
-  aboutBio: string[]
-  featuredBookDescription: string
+  aboutBio: PortableTextBlock[]
+  featuredBookDescription: PortableTextBlock[]
   featuredBookProgress: number
 }
 
 export interface BioPage {
-  bioParagraphs: string[]
+  bioParagraphs: PortableTextBlock[]
   education: Education[]
 }
 

@@ -15,8 +15,8 @@ export const faqItem = defineType({
       name: 'answer',
       title: 'Answer',
       type: 'array',
-      of: [{ type: 'text' }],
-      description: 'Each item in the list becomes a separate paragraph.',
+      of: [{ type: 'block' }],
+      description: 'Rich text answer — supports bold, italic, and links.',
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({

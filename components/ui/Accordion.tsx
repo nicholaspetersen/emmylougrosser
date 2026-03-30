@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@/sanity/lib/types";
 
 interface AccordionItemProps {
   question: string;
-  answer: string | string[];
+  answer: PortableTextBlock[];
   isOpen: boolean;
   onToggle: () => void;
 }
 
 function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProps) {
-  const paragraphs = Array.isArray(answer) ? answer : [answer];
   return (
     <div className="bg-white border border-border-light shadow-xs">
       <button
@@ -44,15 +45,11 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
       </button>
       <div
         className={`overflow-hidden transition-all duration-200 ${
-          isOpen ? "max-h-[600px]" : "max-h-0"
+          isOpen ? "max-h-[800px]" : "max-h-0"
         }`}
       >
-        <div className="px-4 lg:px-5 pb-4 lg:pb-5 flex flex-col gap-3">
-          {paragraphs.map((para, i) => (
-            <p key={i} className="text-sm lg:text-base text-foreground-secondary leading-relaxed">
-              {para}
-            </p>
-          ))}
+        <div className="px-4 lg:px-5 pb-4 lg:pb-5 text-sm lg:text-base text-foreground-secondary leading-relaxed space-y-3 [&_em]:italic [&_strong]:font-semibold [&_a]:underline [&_a]:hover:text-foreground">
+          <PortableText value={answer} />
         </div>
       </div>
     </div>
@@ -60,7 +57,7 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
 }
 
 interface AccordionProps {
-  items: { question: string; answer: string | string[] }[];
+  items: { question: string; answer: PortableTextBlock[] }[];
 }
 
 export default function Accordion({ items }: AccordionProps) {

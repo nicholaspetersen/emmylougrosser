@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
+import { PortableText } from "@portabletext/react";
 import { safeFetch } from "@/sanity/lib/client";
 import { bioPageQuery } from "@/sanity/lib/queries";
 import type { BioPage } from "@/sanity/lib/types";
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 export default async function BioPage() {
   const page = await safeFetch<BioPage | null>(bioPageQuery, null);
 
-  const bioParagraphs = page?.bioParagraphs ?? [];
+  const bioParagraphs = page?.bioParagraphs ?? ([] as import("@/sanity/lib/types").PortableTextBlock[]);
   const education = page?.education ?? [];
 
   return (
@@ -55,10 +56,8 @@ export default async function BioPage() {
                   Dr. Emmylou J. Grosser
                 </h2>
 
-                <div className="mt-8 space-y-6 text-lg leading-7 text-foreground-secondary">
-                  {bioParagraphs.map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                  ))}
+                <div className="mt-8 text-lg leading-7 text-foreground-secondary space-y-6 [&_em]:italic [&_strong]:font-semibold [&_a]:underline [&_a]:hover:text-foreground">
+                  <PortableText value={bioParagraphs} />
                 </div>
 
                 {/* Education Section */}

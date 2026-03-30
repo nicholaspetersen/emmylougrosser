@@ -21,18 +21,18 @@ export const homePage = defineType({
     // About section
     defineField({
       name: 'aboutBio',
-      title: 'About Bio Paragraphs',
+      title: 'About Bio',
       type: 'array',
-      of: [{ type: 'text' }],
-      description: 'Each item becomes a paragraph in the About Dr. Grosser section',
+      of: [{ type: 'block' }],
+      description: 'Rich text shown in the About Dr. Grosser section on the homepage',
     }),
     // Featured book section
     defineField({
       name: 'featuredBookDescription',
       title: 'Featured Book Description',
-      type: 'text',
-      rows: 5,
-      description: 'Description paragraph in the Unparalleled Poetry section',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Rich text shown in the Unparalleled Poetry section',
     }),
     defineField({
       name: 'featuredBookProgress',
