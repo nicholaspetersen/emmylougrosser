@@ -4,6 +4,7 @@ export const bioPage = defineType({
   name: 'bioPage',
   title: 'Bio Page',
   type: 'document',
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'bioParagraphs',

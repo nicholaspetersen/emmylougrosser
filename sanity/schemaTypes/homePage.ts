@@ -4,6 +4,7 @@ export const homePage = defineType({
   name: 'homePage',
   title: 'Home Page',
   type: 'document',
+  __experimental_actions: ['update', 'publish'],
   fields: [
     // Hero section
     defineField({
