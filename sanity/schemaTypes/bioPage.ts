@@ -1,11 +1,11 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
+import type { DocumentDefinition } from 'sanity'
 
-export const bioPage = defineType({
+export const bioPage = {
   name: 'bioPage',
   title: 'Bio Page',
   type: 'document',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  __experimental_actions: ['update', 'publish'] as any,
+  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'bioParagraphs',
@@ -47,4 +47,4 @@ export const bioPage = defineType({
       return { title: 'Bio Page' }
     },
   },
-})
+} satisfies DocumentDefinition & { __experimental_actions: string[] }

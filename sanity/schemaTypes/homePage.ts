@@ -1,13 +1,12 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
+import type { DocumentDefinition } from 'sanity'
 
-export const homePage = defineType({
+export const homePage = {
   name: 'homePage',
   title: 'Home Page',
   type: 'document',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  __experimental_actions: ['update', 'publish'] as any,
+  __experimental_actions: ['update', 'publish'],
   fields: [
-    // Hero section
     defineField({
       name: 'heroHeadline',
       title: 'Hero Headline',
@@ -20,7 +19,6 @@ export const homePage = defineType({
       type: 'string',
       description: 'Subtitle text below the headline',
     }),
-    // About section
     defineField({
       name: 'aboutBio',
       title: 'About Bio',
@@ -28,7 +26,6 @@ export const homePage = defineType({
       of: [{ type: 'block' }],
       description: 'Rich text shown in the About Dr. Grosser section on the homepage',
     }),
-    // Featured book section
     defineField({
       name: 'featuredBookDescription',
       title: 'Featured Book Description',
@@ -49,4 +46,4 @@ export const homePage = defineType({
       return { title: 'Home Page' }
     },
   },
-})
+} satisfies DocumentDefinition & { __experimental_actions: string[] }
