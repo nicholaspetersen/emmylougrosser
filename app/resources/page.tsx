@@ -26,7 +26,6 @@ export default async function ResourcesPage() {
       <Header />
       <main>
         <PatternHero
-          label="Resources"
           title="Publications & Resources"
           subtitle="Publications, articles, and other resources on biblical Hebrew poetry"
         />
