@@ -1,0 +1,28 @@
+name: Sanity Dataset Backup
+
+on:
+  schedule:
+    # Runs every Sunday at 2am UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+    # Also allows manual trigger from the GitHub Actions tab
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Export Sanity dataset
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+        run: |
+          npx sanity@latest dataset export ${{ secrets.SANITY_DATASET }} ./backup.tar.gz \
+            --project ${{ secrets.SANITY_PROJECT_ID }} \
+            --dataset ${{ secrets.SANITY_DATASET }}
+
+      - name: Upload backup as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sanity-backup-${{ github.run_started_at }}
+          path: backup.tar.gz
+          retention-days: 90
