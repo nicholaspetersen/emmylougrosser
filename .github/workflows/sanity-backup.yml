@@ -17,8 +17,7 @@ jobs:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
         run: |
           npx sanity@latest dataset export ${{ secrets.SANITY_DATASET }} ./backup.tar.gz \
-            --project ${{ secrets.SANITY_PROJECT_ID }} \
-            --dataset ${{ secrets.SANITY_DATASET }}
+            -p ${{ secrets.SANITY_PROJECT_ID }}
 
       - name: Upload backup as artifact
         uses: actions/upload-artifact@v4
