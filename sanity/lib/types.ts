@@ -70,7 +70,7 @@ export interface HomePage {
   heroSubtitle: string
   aboutBio: PortableTextBlock[]
   featuredBookDescription: PortableTextBlock[]
-  featuredBookProgress: number
+  openAccessBlurb: PortableTextBlock[]
 }
 
 export interface BioPage {
@@ -81,5 +81,5 @@ export interface BioPage {
 export interface SupportPage {
   gofundmeUrl: string
   mesaGlobalUrl: string
-  openAccessProgress: number
+  openAccessBlurb: PortableTextBlock[]
 }

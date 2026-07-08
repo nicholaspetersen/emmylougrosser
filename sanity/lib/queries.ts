@@ -76,7 +76,7 @@ export const homePageQuery = groq`
     heroSubtitle,
     aboutBio,
     featuredBookDescription,
-    featuredBookProgress
+    openAccessBlurb
   }
 `
 
@@ -91,6 +91,6 @@ export const supportPageQuery = groq`
   *[_type == "supportPage" && _id == "supportPage"][0] {
     gofundmeUrl,
     mesaGlobalUrl,
-    openAccessProgress
+    openAccessBlurb
   }
 `

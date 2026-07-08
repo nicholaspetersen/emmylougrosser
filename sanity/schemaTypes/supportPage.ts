@@ -18,11 +18,11 @@ export const supportPage = {
       type: 'url',
     }),
     defineField({
-      name: 'openAccessProgress',
-      title: 'Open Access Progress (%)',
-      type: 'number',
-      description: 'Percentage toward open access goal shown on this page (0–100)',
-      validation: (Rule) => Rule.min(0).max(100),
+      name: 'openAccessBlurb',
+      title: 'Open Access Blurb',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Short paragraph about the open access campaign shown in the GoFundMe section',
     }),
   ],
   preview: {

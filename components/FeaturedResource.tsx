@@ -11,8 +11,12 @@ export default async function FeaturedResource() {
     { _type: "block", _key: "a", style: "normal", markDefs: [], children: [{ _type: "span", _key: "a1", marks: [], text: "The driving questions of Unparalleled Poetry are, what makes a line a line and a poem a poem, and what strategies do we need in order to read (= hear!) these poems according to their conventions? By highlighting the literary structures and potential effects of biblical Hebrew poetry, I seek to help scholars, translators, and readers across traditions better understand the text and its meaning\u2014and its potential to artistically impact and shape its audiences." }] } as PortableTextBlock,
   ];
 
+  const fallbackOpenAccessBlurb: PortableTextBlock[] = [
+    { _type: "block", _key: "oab1", style: "normal", markDefs: [], children: [{ _type: "span", _key: "oab1s1", marks: [], text: "Academic monographs are inaccessible to many scholars globally due to cost. You can help make this book open access (free for download) for readers everywhere. We are 46% of the way there. If 35 more people donate the cost of one book ($120), Unparalleled Poetry will become open access." }] } as PortableTextBlock,
+  ];
+
   const description = page?.featuredBookDescription ?? fallbackDescription;
-  const progress = page?.featuredBookProgress ?? 40;
+  const openAccessBlurb = page?.openAccessBlurb ?? fallbackOpenAccessBlurb;
 
   return (
     <section className="bg-background-secondary py-16 lg:py-24 overflow-hidden">
@@ -80,13 +84,9 @@ export default async function FeaturedResource() {
                 </Button>
               </div>
 
-              <p className="text-sm leading-5 text-foreground-secondary">
-                Academic monographs are inaccessible to many scholars globally due
-                to cost. You can help make this book open access (free for download)
-                for readers everywhere. Thanks to a generous gift, we are {progress}% of the
-                way there. If 46 people donate the cost of one book ($115),
-                Unparalleled Poetry will become open access!
-              </p>
+              <div className="text-sm leading-5 text-foreground-secondary [&_em]:italic [&_strong]:font-semibold">
+                <PortableText value={openAccessBlurb} />
+              </div>
 
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
                 <a

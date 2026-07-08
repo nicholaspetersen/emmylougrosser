@@ -34,11 +34,11 @@ export const homePage = {
       description: 'Rich text shown in the Unparalleled Poetry section',
     }),
     defineField({
-      name: 'featuredBookProgress',
-      title: 'Open Access Progress (%)',
-      type: 'number',
-      description: 'Percentage toward open access goal (0–100)',
-      validation: (Rule) => Rule.min(0).max(100),
+      name: 'openAccessBlurb',
+      title: 'Open Access Blurb',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Short paragraph about the open access campaign shown below the book description on the home page',
     }),
   ],
   preview: {

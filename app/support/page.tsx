@@ -3,9 +3,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
+import { PortableText } from "@portabletext/react";
 import { safeFetch } from "@/sanity/lib/client";
 import { supportPageQuery } from "@/sanity/lib/queries";
-import type { SupportPage } from "@/sanity/lib/types";
+import type { SupportPage, PortableTextBlock } from "@/sanity/lib/types";
 
 export const revalidate = 3600;
 
@@ -20,7 +21,12 @@ export default async function SupportPage() {
 
   const gofundmeUrl = page?.gofundmeUrl ?? 'https://www.gofundme.com/f/make-unparalleled-poetry-open-access';
   const mesaGlobalUrl = page?.mesaGlobalUrl ?? 'https://www.mesaglobal.co/projects/68046';
-  const progress = page?.openAccessProgress ?? 40;
+
+  const fallbackOpenAccessBlurb: PortableTextBlock[] = [
+    { _type: "block", _key: "oab1", style: "normal", markDefs: [], children: [{ _type: "span", _key: "oab1s1", marks: [], text: "Help make this book free to download for readers everywhere. If 35 more people donate the cost of one book ($120), " }, { _type: "span", _key: "oab1s2", marks: ["em"], text: "Unparalleled Poetry" }, { _type: "span", _key: "oab1s3", marks: [], text: " will become open access. We\u2019re already 46% of the way there!" }] } as PortableTextBlock,
+  ];
+
+  const openAccessBlurb = page?.openAccessBlurb ?? fallbackOpenAccessBlurb;
 
   return (
     <>
@@ -54,9 +60,9 @@ export default async function SupportPage() {
                 <div className="flex-1">
                   <h3 className="font-semibold text-xl text-foreground">Make <em>Unparalleled Poetry</em> Open Access</h3>
                   <p className="mt-1 text-sm font-medium text-accent">via GoFundMe</p>
-                  <p className="mt-3 text-foreground-secondary">
-                    Help make this book free to download for readers everywhere. If 46 people donate the cost of one book ($115), <em>Unparalleled Poetry</em> will become open access. We&apos;re already {progress}% of the way there!
-                  </p>
+                  <div className="mt-3 text-foreground-secondary [&_em]:italic [&_strong]:font-semibold">
+                    <PortableText value={openAccessBlurb} />
+                  </div>
                 </div>
                 <div className="sm:flex-shrink-0">
                   <Button href={gofundmeUrl} variant="primary" external>
