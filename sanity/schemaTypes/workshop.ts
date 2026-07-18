@@ -49,6 +49,15 @@ export const workshop = defineType({
       ],
     }),
     defineField({
+      name: 'attachment',
+      title: 'Attachment',
+      type: 'file',
+      description: 'Optional file (PDF or image) visitors can view or download',
+      options: {
+        accept: '.pdf,image/*',
+      },
+    }),
+    defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',

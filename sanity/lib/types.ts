@@ -10,6 +10,7 @@ export interface Workshop {
   location?: string
   description?: string
   cta?: { label: string; href: string }
+  attachmentUrl?: string
 }
 
 export interface Presentation {
