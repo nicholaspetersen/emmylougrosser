@@ -41,21 +41,33 @@ export const workshop = defineType({
       fields: [
         defineField({ name: 'label', title: 'Label', type: 'string' }),
         defineField({
+          name: 'linkType',
+          title: 'Link Type',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'URL', value: 'url' },
+              { title: 'File attachment', value: 'file' },
+              { title: 'No link (placeholder text only)', value: 'none' },
+            ],
+            layout: 'dropdown',
+          },
+          initialValue: 'none',
+        }),
+        defineField({
           name: 'href',
           title: 'URL',
           type: 'string',
-          description: 'Leave empty to show as disabled button',
+          hidden: ({ parent }: { parent?: { linkType?: string } }) => parent?.linkType !== 'url',
+        }),
+        defineField({
+          name: 'attachment',
+          title: 'Attachment',
+          type: 'file',
+          options: { accept: '.pdf,image/*' },
+          hidden: ({ parent }: { parent?: { linkType?: string } }) => parent?.linkType !== 'file',
         }),
       ],
-    }),
-    defineField({
-      name: 'attachment',
-      title: 'Attachment',
-      type: 'file',
-      description: 'Optional file (PDF or image) visitors can view or download',
-      options: {
-        accept: '.pdf,image/*',
-      },
     }),
     defineField({
       name: 'order',

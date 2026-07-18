@@ -8,8 +8,12 @@ export const workshopsQuery = groq`
     event,
     location,
     description,
-    cta,
-    "attachmentUrl": attachment.asset->url
+    cta {
+      label,
+      linkType,
+      href,
+      "attachmentUrl": attachment.asset->url
+    }
   }
 `
 

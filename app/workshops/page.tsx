@@ -101,23 +101,20 @@ export default async function WorkshopsPage() {
                         </p>
                       )}
                     </div>
-                    {(workshop.cta || workshop.attachmentUrl) && (
-                      <div className="flex flex-wrap gap-3 flex-shrink-0">
-                        {workshop.attachmentUrl && (
-                          <Button href={workshop.attachmentUrl} variant="primary" external>
-                            View Attachment
+                    {workshop.cta && (
+                      <div className="flex-shrink-0">
+                        {workshop.cta.linkType === 'url' && workshop.cta.href ? (
+                          <Button href={workshop.cta.href} variant="primary">
+                            {workshop.cta.label}
                           </Button>
-                        )}
-                        {workshop.cta && (
-                          workshop.cta.href ? (
-                            <Button href={workshop.cta.href} variant="outline">
-                              {workshop.cta.label}
-                            </Button>
-                          ) : !workshop.attachmentUrl ? (
-                            <span className="inline-flex items-center justify-center px-[18px] py-[12px] text-base leading-6 border border-border text-foreground-secondary bg-background-secondary cursor-default opacity-60">
-                              {workshop.cta.label}
-                            </span>
-                          ) : null
+                        ) : workshop.cta.linkType === 'file' && workshop.cta.attachmentUrl ? (
+                          <Button href={workshop.cta.attachmentUrl} variant="primary" external>
+                            {workshop.cta.label}
+                          </Button>
+                        ) : (
+                          <span className="inline-flex items-center justify-center px-[18px] py-[12px] text-base leading-6 border border-border text-foreground-secondary bg-background-secondary cursor-default opacity-60">
+                            {workshop.cta.label}
+                          </span>
                         )}
                       </div>
                     )}

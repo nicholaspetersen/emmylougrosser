@@ -9,8 +9,12 @@ export interface Workshop {
   event?: string
   location?: string
   description?: string
-  cta?: { label: string; href: string }
-  attachmentUrl?: string
+  cta?: {
+    label: string
+    linkType: 'url' | 'file' | 'none'
+    href?: string
+    attachmentUrl?: string
+  }
 }
 
 export interface Presentation {
