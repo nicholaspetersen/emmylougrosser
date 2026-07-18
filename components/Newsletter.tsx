@@ -66,7 +66,7 @@ export default function Newsletter() {
 
             {status === "success" && (
               <p className="mt-4 text-sm text-green-700 text-center">
-                Thank you for subscribing! You&apos;ll hear from us soon.
+                Thank you for subscribing! Check your inbox for a confirmation email.
               </p>
             )}
           </form>

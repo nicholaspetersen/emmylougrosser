@@ -20,7 +20,7 @@ export default function FooterSubscribe() {
   return (
     <>
       {status === "success" ? (
-        <p className="text-sm text-foreground-secondary">Thanks for subscribing!</p>
+        <p className="text-sm text-foreground-secondary">Thank you for subscribing! Check your inbox for a confirmation email.</p>
       ) : (
         <form
           action="https://mesaglobal.us6.list-manage.com/subscribe/post?u=8c0bd5bec630e48dbd14b4efb&id=e4c59ed36d"
