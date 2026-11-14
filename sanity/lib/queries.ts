@@ -52,7 +52,9 @@ export const resourcesQuery = groq`
     source,
     description,
     note,
-    link
+    linkType,
+    link,
+    "attachmentUrl": attachment.asset->url
   }
 `
 

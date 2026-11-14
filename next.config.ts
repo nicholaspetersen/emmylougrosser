@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
-  // Allow Sanity Studio to be embedded at /studio
-  // The Studio uses its own React tree and doesn't need server components
+  // A lockfile outside this repo was making Turbopack treat ~/Sites as the root.
+  turbopack: {
+    root: path.join(__dirname),
+  },
 };
 
 export default nextConfig;

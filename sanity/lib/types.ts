@@ -47,7 +47,9 @@ export interface Resource {
   source?: string
   description: string
   note?: string
+  linkType?: 'url' | 'file' | 'none'
   link?: string
+  attachmentUrl?: string
 }
 
 export interface Project {

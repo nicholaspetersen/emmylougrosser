@@ -39,15 +39,38 @@ export const resource = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'note',
-      title: 'Note',
+      name: 'linkType',
+      title: 'Link Type',
       type: 'string',
-      description: 'e.g. "Coming soon" or "Link forthcoming"',
+      description: 'Choose a web link, upload a file, or leave this as text only.',
+      options: {
+        list: [
+          { title: 'URL', value: 'url' },
+          { title: 'File attachment', value: 'file' },
+          { title: 'No link (placeholder text only)', value: 'none' },
+        ],
+        layout: 'dropdown',
+      },
+      initialValue: 'none',
     }),
     defineField({
       name: 'link',
       title: 'URL',
       type: 'url',
+      hidden: ({ parent }: { parent?: { linkType?: string } }) => parent?.linkType !== 'url',
+    }),
+    defineField({
+      name: 'attachment',
+      title: 'Attachment',
+      type: 'file',
+      options: { accept: '.pdf,image/*' },
+      hidden: ({ parent }: { parent?: { linkType?: string } }) => parent?.linkType !== 'file',
+    }),
+    defineField({
+      name: 'note',
+      title: 'Note',
+      type: 'string',
+      description: 'e.g. "Coming soon" or "Link forthcoming"',
     }),
     defineField({
       name: 'order',

@@ -7,6 +7,12 @@ import { safeFetch } from "@/sanity/lib/client";
 import { publicationsQuery, resourcesQuery } from "@/sanity/lib/queries";
 import type { Publication, Resource } from "@/sanity/lib/types";
 
+function resourceHref(resource: Resource): string | undefined {
+  if (resource.linkType === "file") return resource.attachmentUrl || resource.link;
+  if (resource.linkType === "none") return undefined;
+  return resource.link;
+}
+
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
@@ -231,10 +237,10 @@ export default async function ResourcesPage() {
                       {resource.note}
                     </p>
                   )}
-                  {resource.link && (
+                  {resourceHref(resource) && (
                     <div className="mt-6">
                       <Button
-                        href={resource.link}
+                        href={resourceHref(resource)}
                         variant="primary"
                         external
                       >
