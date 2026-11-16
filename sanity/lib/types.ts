@@ -52,6 +52,10 @@ export interface Resource {
   attachmentUrl?: string
 }
 
+export interface ResourcesPage {
+  featuredResource?: Resource | null
+}
+
 export interface Project {
   _id: string
   title: string

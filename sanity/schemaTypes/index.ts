@@ -7,12 +7,14 @@ import { faqItem } from './faqItem'
 import { homePage } from './homePage'
 import { bioPage } from './bioPage'
 import { supportPage } from './supportPage'
+import { resourcesPage } from './resourcesPage'
 
 export const schemaTypes = [
   // Page singletons
   homePage,
   bioPage,
   supportPage,
+  resourcesPage,
   // Content collections
   workshop,
   presentation,

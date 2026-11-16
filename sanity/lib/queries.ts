@@ -44,17 +44,29 @@ export const publicationsQuery = groq`
   }
 `
 
+const resourceFields = groq`
+  _id,
+  title,
+  type,
+  source,
+  description,
+  note,
+  linkType,
+  link,
+  "attachmentUrl": attachment.asset->url
+`
+
 export const resourcesQuery = groq`
   *[_type == "resource"] | order(order asc) {
-    _id,
-    title,
-    type,
-    source,
-    description,
-    note,
-    linkType,
-    link,
-    "attachmentUrl": attachment.asset->url
+    ${resourceFields}
+  }
+`
+
+export const resourcesPageQuery = groq`
+  *[_type == "resourcesPage" && _id == "resourcesPage"][0] {
+    featuredResource->{
+      ${resourceFields}
+    }
   }
 `
 

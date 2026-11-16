@@ -4,13 +4,138 @@ import Footer from "@/components/Footer";
 import PatternHero from "@/components/PatternHero";
 import Button from "@/components/ui/Button";
 import { safeFetch } from "@/sanity/lib/client";
-import { publicationsQuery, resourcesQuery } from "@/sanity/lib/queries";
-import type { Publication, Resource } from "@/sanity/lib/types";
+import { publicationsQuery, resourcesPageQuery, resourcesQuery } from "@/sanity/lib/queries";
+import type { Publication, Resource, ResourcesPage } from "@/sanity/lib/types";
 
 function resourceHref(resource: Resource): string | undefined {
   if (resource.linkType === "file") return resource.attachmentUrl || resource.link;
   if (resource.linkType === "none") return undefined;
   return resource.link;
+}
+
+function ResourceTypeIcon({ type }: { type: Resource["type"] }) {
+  if (type === "Podcast") {
+    return (
+      <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+        />
+      </svg>
+    );
+  }
+
+  if (type === "Interview") {
+    return (
+      <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+        />
+      </svg>
+    );
+  }
+
+  if (type === "Presentation") {
+    return (
+      <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+      />
+    </svg>
+  );
+}
+
+function ResourceCard({ resource }: { resource: Resource }) {
+  const href = resourceHref(resource);
+
+  return (
+    <article className="p-6 border border-border-light">
+      <div className="mb-4">
+        <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10">
+          <ResourceTypeIcon type={resource.type} />
+        </div>
+      </div>
+      <h3 className="font-semibold text-lg text-foreground">
+        {resource.title}
+      </h3>
+      {resource.source && (
+        <p className="mt-3 text-sm text-foreground-secondary">
+          {resource.source}
+        </p>
+      )}
+      <p className="mt-3 text-sm text-foreground-secondary leading-relaxed">
+        {resource.description}
+      </p>
+      {resource.note && (
+        <p className="mt-2 text-xs text-foreground-tertiary italic">
+          {resource.note}
+        </p>
+      )}
+      {href && (
+        <div className="mt-6">
+          <Button href={href} variant="primary" external>
+            View Resource
+          </Button>
+        </div>
+      )}
+    </article>
+  );
+}
+
+function FeaturedResourceCard({ resource }: { resource: Resource }) {
+  const href = resourceHref(resource);
+
+  return (
+    <article className="bg-white p-6 sm:p-8 shadow-xs">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex min-w-0 flex-col lg:flex-row lg:gap-5">
+          <div className="mb-4 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 lg:mb-0">
+            <ResourceTypeIcon type={resource.type} />
+          </div>
+          <div className="min-w-0">
+            <p className="text-base font-semibold leading-6 text-accent">Featured Resource</p>
+            <h2 className="mt-1 font-serif font-medium text-xl lg:text-2xl text-foreground">
+              {resource.title}
+            </h2>
+            {resource.source && (
+              <p className="mt-1 text-sm text-foreground-secondary">{resource.source}</p>
+            )}
+            <p className="mt-2 text-foreground-secondary leading-7">{resource.description}</p>
+            {resource.note && (
+              <p className="mt-2 text-sm text-foreground-tertiary italic">{resource.note}</p>
+            )}
+          </div>
+        </div>
+        {href && (
+          <div className="shrink-0 lg:pl-8">
+            <Button href={href} variant="primary" external>
+              View Resource
+            </Button>
+          </div>
+        )}
+      </div>
+    </article>
+  );
 }
 
 export const revalidate = 3600;
@@ -22,10 +147,13 @@ export const metadata: Metadata = {
 };
 
 export default async function ResourcesPage() {
-  const [selectedPublications, otherResources] = await Promise.all([
+  const [selectedPublications, otherResources, resourcesPage] = await Promise.all([
     safeFetch<Publication[]>(publicationsQuery, []),
     safeFetch<Resource[]>(resourcesQuery, []),
+    safeFetch<ResourcesPage | null>(resourcesPageQuery, null),
   ]);
+
+  const featuredResource = resourcesPage?.featuredResource;
 
   return (
     <>
@@ -36,8 +164,16 @@ export default async function ResourcesPage() {
           subtitle="Publications, articles, and other resources on biblical Hebrew poetry"
         />
 
+        {featuredResource && (
+          <section className="bg-background-secondary pt-16 lg:pt-24">
+            <div className="mx-auto max-w-[1280px] px-8">
+              <FeaturedResourceCard resource={featuredResource} />
+            </div>
+          </section>
+        )}
+
         {/* Selected Publications */}
-        <section className="bg-background-secondary py-16 lg:py-24">
+        <section className={featuredResource ? "bg-background-secondary pt-12 lg:pt-16" : "bg-background-secondary pt-16 lg:pt-24"}>
           <div className="mx-auto max-w-[1280px] px-8">
             <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground text-center">
               Selected Publications
@@ -145,7 +281,7 @@ export default async function ResourcesPage() {
         </section>
 
         {/* Other Resources */}
-        <section className="bg-background-secondary py-16 lg:py-24">
+        <section className="bg-background-secondary pt-12 lg:pt-16 pb-16 lg:pb-24">
           <div className="mx-auto max-w-[1280px] px-8">
             <h2 className="font-serif font-medium text-[30px] leading-[38px] text-foreground text-center">
               Other Resources
@@ -153,102 +289,7 @@ export default async function ResourcesPage() {
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
               {otherResources.map((resource) => (
-                <article
-                  key={resource._id}
-                  className="p-6 border border-border-light"
-                >
-                  <div className="mb-4">
-                    <div className="inline-flex rounded-full items-center justify-center w-10 h-10 bg-primary/10">
-                      {resource.type === "Podcast" && (
-                        <svg
-                          className="w-5 h-5 text-primary"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                          />
-                        </svg>
-                      )}
-                      {resource.type === "Interview" && (
-                        <svg
-                          className="w-5 h-5 text-primary"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                          />
-                        </svg>
-                      )}
-                      {resource.type === "Article" && (
-                        <svg
-                          className="w-5 h-5 text-primary"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                          />
-                        </svg>
-                      )}
-                      {resource.type === "Presentation" && (
-                        <svg
-                          className="w-5 h-5 text-primary"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                  <h3 className="font-semibold text-lg text-foreground">
-                    {resource.title}
-                  </h3>
-                  {resource.source && (
-                    <p className="mt-3 text-sm text-foreground-secondary">
-                      {resource.source}
-                    </p>
-                  )}
-                  <p className="mt-3 text-sm text-foreground-secondary leading-relaxed">
-                    {resource.description}
-                  </p>
-                  {resource.note && (
-                    <p className="mt-2 text-xs text-foreground-tertiary italic">
-                      {resource.note}
-                    </p>
-                  )}
-                  {resourceHref(resource) && (
-                    <div className="mt-6">
-                      <Button
-                        href={resourceHref(resource)}
-                        variant="primary"
-                        external
-                      >
-                        View Resource
-                      </Button>
-                    </div>
-                  )}
-                </article>
+                <ResourceCard key={resource._id} resource={resource} />
               ))}
             </div>
           </div>

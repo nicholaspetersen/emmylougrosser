@@ -48,6 +48,14 @@ export default defineConfig({
                           .schemaType('supportPage')
                           .documentId('supportPage')
                       ),
+                    S.listItem()
+                      .title('Resources Page')
+                      .id('resourcesPage')
+                      .child(
+                        S.document()
+                          .schemaType('resourcesPage')
+                          .documentId('resourcesPage')
+                      ),
                   ])
               ),
             S.divider(),
